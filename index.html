@@ -1,0 +1,728 @@
+<!DOCTYPE html>
+<html data-wf-domain="www.gethyped.nl" data-wf-page="686bbda47339dde89316ddd0" data-wf-site="6848603da8e6ac95794b7498"
+    lang="en">
+
+<head>
+    <title>Ai-Yooo Startup</title>
+    <link
+        href="https://cdn.prod.website-files.com/6848603da8e6ac95794b7498/css/gethyped-preview.webflow.shared.6c2a2e206.min.css"
+        rel="stylesheet" type="text/css" />
+</head>
+
+<body color-mode="">
+    <div class="page-wrapper">
+        <div class="global-styles">
+            <div class="adaptive-scaling w-embed">
+                <style>
+                    /* ------------------------- Scaling System by Osmo [https://osmo.supply/] -------------------------  */
+                    /* Desktop */
+                    :root {
+                        --size-unit: 16;
+                        /* body font-size in design - no px */
+                        --size-container-ideal: 1920;
+                        /* screen-size in design - no px */
+                        --size-container-min: 992px;
+                        --size-container-max: 1920px;
+                        --size-container: clamp(var(--size-container-min), 100vw, var(--size-container-max));
+                        --size-font: calc(var(--size-container) / (var(--size-container-ideal) / var(--size-unit)));
+                    }
+
+                    /* Tablet */
+                    @media screen and (max-width: 991px) {
+                        :root {
+                            --size-container-ideal: 991;
+                            /* screen-size in design - no px */
+                            --size-container-min: 768px;
+                            --size-container-max: 991px;
+                        }
+                    }
+
+                    /* Mobile Landscape */
+                    @media screen and (max-width: 767px) {
+                        :root {
+                            --size-container-ideal: 767;
+                            /* screen-size in design - no px */
+                            --size-container-min: 480px;
+                            --size-container-max: 767px;
+                        }
+                    }
+
+                    /* Mobile Portrait */
+                    @media screen and (max-width: 479px) {
+                        :root {
+                            --size-container-ideal: 479;
+                            /* screen-size in design - no px */
+                            --size-container-min: 320px;
+                            --size-container-max: 479px;
+                        }
+                    }
+                </style>
+            </div>
+            <div class="button-swoosh w-embed">
+                <style>
+                    /* color swoosh */
+                    .button-color-swoosh {
+                        --elastic-ease-out: linear(0,
+                                0.5737 7.6%, a 0.8382 11.87%,
+                                0.9463 14.19%,
+                                1.0292 16.54%,
+                                1.0886 18.97%,
+                                1.1258 21.53%,
+                                1.137 22.97%,
+                                1.1424 24.48%,
+                                1.1423 26.1%,
+                                1.1366 27.86%,
+                                1.1165 31.01%,
+                                1.0507 38.62%,
+                                1.0219 42.57%,
+                                0.9995 46.99%,
+                                0.9872 51.63%,
+                                0.9842 58.77%,
+                                1.0011 81.26%,
+                                1);
+                        --smooth-ease: cubic-bezier(.32, .72, 0, 1);
+                        --color-ease: cubic-bezier(.215, .61, .355, 1);
+                        transition: transform .45s var(--elastic-ease-out);
+                        -webkit-tap-highlight-color: transparent;
+                    }
+
+                    .button-color-swoosh:active {
+                        transform: scaleX(0.955) scaleY(0.954);
+                    }
+
+                    .button-color-swoosh_bg {
+                        transition: scale .45s var(--smooth-ease), background-color .2s var(--color-ease);
+                    }
+
+                    .button-color-swoosh_bg-inner {
+                        translate: -10% 100% 0;
+                        rotate: 0 0 1 -12deg;
+                        transition: translate .6s var(--smooth-ease), rotate .5s var(--smooth-ease);
+                        transition-delay: calc((var(--index) * -1) * .042s);
+                    }
+
+                    .button-color-swoosh_inner::after {
+                        content: attr(data-text);
+                        color: #f0ece5;
+                        display: block;
+                        grid-area: 1 / 1;
+                        translate: 0 2em 0;
+                        rotate: 1 1 .5 -30deg;
+                        transform-origin: top right;
+                        transition: translate .75s var(--elastic-ease-out), rotate .5s var(--smooth-ease), opacity .2s ease-out;
+                    }
+
+                    .button-color-swoosh_text {
+                        transition: translate .75s var(--elastic-ease-out), rotate .5s var(--smooth-ease), opacity .2s ease-out, color .2s var(--color-ease);
+                    }
+
+                    @media (hover: hover) and (pointer: fine) {
+                        .button-color-swoosh:is(:hover, :focus-visible) .button-color-swoosh_bg {
+                            scale: 1.065 1.095;
+                        }
+
+                        .button-color-swoosh:is(:hover, :focus-visible) .button-color-swoosh_bg-inner {
+                            translate: -10% 0 0;
+                            rotate: 0 0 1 0deg;
+                            transition-delay: calc(var(--index) * .064s);
+                        }
+
+                        .button-color-swoosh:is(:hover, :focus-visible) .button-color-swoosh_text {
+                            rotate: 1 1 0.45 -60deg;
+                            translate: 0 -2em 0;
+                            opacity: 0;
+                        }
+
+                        .button-color-swoosh:is(:hover, :focus-visible) .button-color-swoosh_inner::after {
+                            rotate: 1 1 .45 0deg;
+                            translate: 0 0 0;
+                            opacity: 1;
+                            transition-delay: .1s;
+                        }
+                    }
+                </style>
+            </div>
+            <div class="display-settings w-embed">
+                <style>
+                    /* These classes are never overwritten */
+                    .hide {
+                        display: none !important;
+                    }
+
+                    @media screen and (min-width: 992px) {
+
+                        .hide,
+                        .hide-desktop {
+                            display: none !important;
+                        }
+                    }
+
+                    @media screen and (min-width: 480px) {
+
+                        .hide,
+                        .hide-desktop-tablet {
+                            display: none !important;
+                        }
+                    }
+
+                    @media screen and (max-width: 991px) {
+
+                        .hide,
+                        .hide-tablet-mobile {
+                            display: none !important;
+                        }
+                    }
+
+                    @media screen and (max-width: 767px) {
+                        .hide-mobile-landscape {
+                            display: none !important;
+                        }
+                    }
+
+                    @media screen and (max-width: 479px) {
+                        .hide-mobile {
+                            display: none !important;
+                        }
+                    }
+                </style>
+            </div>
+            <div class="_w-style-override w-embed">
+                <style>
+                    a,
+                    .w-input,
+                    .w-select,
+                    .w-tab-link,
+                    .w-nav-link,
+                    .w-dropdown-btn,
+                    .w-dropdown-toggle,
+                    .w-dropdown-link {
+                        color: inherit;
+                        text-decoration: inherit;
+                        font-size: inherit;
+                    }
+
+                    /* Remove the default Webflow icons from Input- Select and Text Area fields */
+                    input,
+                    select,
+                    textarea {
+                        -webkit-appearance: none !important;
+                        -moz-appearance: none !important;
+                        appearance: none !important
+                    }
+
+                    /* Dropdown Toggle */
+                    .w-dropdown-toggle,
+                    .w-dropdown-toggle.w--open {
+                        margin: 0;
+                        border: none;
+                        background: none;
+                        font-family: inherit;
+                        font-size: inherit;
+                        color: inherit;
+                    }
+                </style>
+            </div>
+        </div>
+        <nav class="nav">
+            <div class="navbar">
+                <link rel="prefetch" href="/" />
+                <div class="navbar_menu">
+                    <a aria-label="Home link" role="Link" href="#home" aria-current="page"
+                        class="button-color-swoosh is-menu w-inline-block w--current">
+                        <span class="button-color-swoosh_bg">
+                            <span STYLE="--index: 0" class="button-color-swoosh_bg-inner is-first"></span>
+                            <span STYLE="--index: 1" class="button-color-swoosh_bg-inner is-second"></span>
+                        </span>
+                        <span data-text="Home" class="button-color-swoosh_inner"><span
+                                class="button-color-swoosh_text">Home</span></span>
+                    </a>
+                    <a aria-label="Portfolio link" role="Link" href="#portfolio"
+                        class="button-color-swoosh is-menu w-inline-block">
+                        <span class="button-color-swoosh_bg">
+                            <span STYLE="--index: 0" class="button-color-swoosh_bg-inner is-first"></span>
+                            <span STYLE="--index: 1" class="button-color-swoosh_bg-inner is-second"></span>
+                        </span>
+                        <span data-text="Portfolio" class="button-color-swoosh_inner"><span
+                                class="button-color-swoosh_text">Portfolio</span></span>
+                    </a>
+                    <a aria-label="Resume link" role="Link" href="#resume"
+                        class="button-color-swoosh is-menu w-inline-block">
+                        <span class="button-color-swoosh_bg">
+                            <span STYLE="--index: 0" class="button-color-swoosh_bg-inner is-first"></span>
+                            <span STYLE="--index: 1" class="button-color-swoosh_bg-inner is-second"></span>
+                        </span>
+                        <span data-text="Resume" class="button-color-swoosh_inner"><span
+                                class="button-color-swoosh_text">Resume</span></span>
+                    </a>
+                    <a aria-label="AI Works link" role="Link" href="#ai-works"
+                        class="button-color-swoosh is-menu w-inline-block">
+                        <span class="button-color-swoosh_bg">
+                            <span STYLE="--index: 0" class="button-color-swoosh_bg-inner is-first"></span>
+                            <span STYLE="--index: 1" class="button-color-swoosh_bg-inner is-second"></span>
+                        </span>
+                        <span data-text="AI Videos & Images" class="button-color-swoosh_inner"><span
+                                class="button-color-swoosh_text">AI Videos & Images</span></span>
+                    </a>
+                    <a aria-label="Websites link" role="Link" href="#websites"
+                        class="button-color-swoosh is-menu w-inline-block">
+                        <span class="button-color-swoosh_bg">
+                            <span STYLE="--index: 0" class="button-color-swoosh_bg-inner is-first"></span>
+                            <span STYLE="--index: 1" class="button-color-swoosh_bg-inner is-second"></span>
+                        </span>
+                        <span data-text="Websites" class="button-color-swoosh_inner"><span
+                                class="button-color-swoosh_text">Websites</span></span>
+                    </a>
+                    <a aria-label="Projects link" role="Link" href="#projects"
+                        class="button-color-swoosh is-menu w-inline-block">
+                        <span class="button-color-swoosh_bg">
+                            <span STYLE="--index: 0" class="button-color-swoosh_bg-inner is-first"></span>
+                            <span STYLE="--index: 1" class="button-color-swoosh_bg-inner is-second"></span>
+                        </span>
+                        <span data-text="Projects" class="button-color-swoosh_inner"><span
+                                class="button-color-swoosh_text">Projects</span></span>
+                    </a>
+                    <a aria-label="Contact link" role="Link" href="#contact"
+                        class="button-color-swoosh is-menu w-inline-block">
+                        <span class="button-color-swoosh_bg">
+                            <span STYLE="--index: 0" class="button-color-swoosh_bg-inner is-first"></span>
+                            <span STYLE="--index: 1" class="button-color-swoosh_bg-inner is-second"></span>
+                        </span>
+                        <span data-text="Contact Us" class="button-color-swoosh_inner"><span
+                                class="button-color-swoosh_text">Contact Us</span></span>
+                    </a>
+                    <div class="navbar_menu-bg"></div>
+                    <div class="navbar_menu-bg-back"></div>
+                </div>
+                <div data-lenis-toggle="" fs-scrolldisable-element="toggle" fs-mirrorclick-element="target-2"
+                    data-w-id="0cbbc5d9-9175-2c0b-20e2-ebfe0c3caf0c" class="navbar_menu-trigger">
+                    <div class="navbar_menu-line is-top"></div>
+                    <div class="navbar_menu-line is-bottom"></div>
+                </div>
+            </div>
+        </nav>
+        <div class="main-wrapper">
+            <header id="section_hero" class="section_hero">
+                <div class="padding-global">
+                    <div class="w-layout-blockcontainer container-col-12 w-container">
+                        <div class="expertise-hero">
+                            <video muted="" loop="" webkit-playsinline="" playsinline=""
+                                src="Media/THIS_IS_4K_KUNG_FU_PANDA.mp4" autoplay="true" class="video"></video>
+                            <div class="expertise-hero_content">
+                                <div class="expertise-hero_title">
+                                    <div class="heading-m">AIYOOO Startup</div>
+                                </div>
+                                <div class="titles_container hide-tablet-mobile">
+                                    <div class="title_item">
+                                        <div class="heading-m">Websites</div>
+                                    </div>
+                                    <div class="title_item">
+                                        <div class="heading-m">Portfolios</div>
+                                    </div>
+                                    <div class="title_item">
+                                        <div class="heading-m">Resumes</div>
+                                    </div>
+                                    <div class="title_item">
+                                        <div class="heading-m">AI Videos & Images</div>
+                                    </div>
+                                    <div class="title_item">
+                                        <div class="heading-m">Projects</div>
+                                    </div>
+                                </div>
+                                <div class="vertical-scroll-wrapper hide-desktop">
+                                    <div class="title_container-m">
+                                        <div class="title_item">
+                                            <div class="heading-m">Websites</div>
+                                        </div>
+                                        <div class="title_item">
+                                            <div class="heading-m">Portfolios</div>
+                                        </div>
+                                        <div class="title_item">
+                                            <div class="heading-m">Resumes</div>
+                                        </div>
+                                        <div class="title_item">
+                                            <div class="heading-m">AI Videos & Images</div>
+                                        </div>
+                                        <div class="title_item">
+                                            <div class="heading-m">Projects</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </header>
+            <section id="expertises" class="section_expertises">
+                <div class="padding-global">
+                    <div class="container-col-12">
+                        <div class="mwg_effect031">
+                            <div class="expertises-collection w-dyn-list">
+                                <div role="list" class="expertises-list w-dyn-items">
+                                    <div role="listitem" class="expertises-item w-dyn-item" id="portfolio">
+                                        <div class="expertise-slide">
+                                            <div class="expertise-wrap">
+                                                <div class="expertise-content theme-white">
+                                                    <div class="expertise-content_top">
+                                                        <div class="label">
+                                                            <div class="paragraph-m">Digital Identity</div>
+                                                        </div>
+                                                        <h2 class="expertise-content_heading">Stunning Portfolios</h2>
+                                                    </div>
+                                                    <div class="expertise-content_img">
+                                                        <div class="medium-image">
+                                                            <video muted="" loop="" webkit-playsinline="" playsinline=""
+                                                                src="Media/Luca.mp4" autoplay="true"
+                                                                class="video"></video>
+                                                        </div>
+                                                    </div>
+                                                    <div class="expertise-content_bottom">
+                                                        <h3 class="heading-xs">Your Best Work, Showcased.</h3>
+                                                        <p class="paragraph-m">We design engaging, high-performance
+                                                            portfolios that tell your unique story. Whether you are an
+                                                            artist, developer, or creator, our custom solutions make
+                                                            sure your work stands out from the crowd.</p>
+                                                        <div class="button-wrap">
+                                                            <a href="#contact" class="button-default w-inline-block">
+                                                                <div class="button-default__inner"><span
+                                                                        class="button-default__background"></span><span
+                                                                        class="button-default__text">Get Yours</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="listitem" class="expertises-item w-dyn-item" id="resume">
+                                        <div class="expertise-slide">
+                                            <div class="expertise-wrap">
+                                                <div class="expertise-content theme-pink">
+                                                    <div class="expertise-content_top">
+                                                        <div class="label">
+                                                            <div class="paragraph-m">Career Boost</div>
+                                                        </div>
+                                                        <h2 class="expertise-content_heading">Professional Resumes</h2>
+                                                    </div>
+                                                    <div class="expertise-content_img">
+                                                        <div class="medium-image">
+                                                            <video muted="" loop="" webkit-playsinline="" playsinline=""
+                                                                src="Media/panda.mp4" autoplay="true"
+                                                                class="video"></video>
+                                                        </div>
+                                                    </div>
+                                                    <div class="expertise-content_bottom">
+                                                        <h3 class="heading-xs">Land Your Dream Job.</h3>
+                                                        <p class="paragraph-m">We create visually compelling and
+                                                            ATS-friendly resumes that highlight your strengths and
+                                                            achievements. Give your career the competitive edge it needs
+                                                            with our modern resume formatting.</p>
+                                                        <div class="button-wrap">
+                                                            <a href="#contact" class="button-default w-inline-block">
+                                                                <div class="button-default__inner"><span
+                                                                        class="button-default__background"></span><span
+                                                                        class="button-default__text">Get Yours</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="listitem" class="expertises-item w-dyn-item" id="ai-works">
+                                        <div class="expertise-slide">
+                                            <div class="expertise-wrap">
+                                                <div class="expertise-content theme-green">
+                                                    <div class="expertise-content_top">
+                                                        <div class="label">
+                                                            <div class="paragraph-m">Next Gen Media</div>
+                                                        </div>
+                                                        <h2 class="expertise-content_heading">AI Videos & Images</h2>
+                                                    </div>
+                                                    <div class="expertise-content_img">
+                                                        <div class="medium-image">
+                                                            <video muted="" loop="" webkit-playsinline="" playsinline=""
+                                                                src="Media/frozen.webm" autoplay="true"
+                                                                class="video"></video>
+                                                        </div>
+                                                    </div>
+                                                    <div class="expertise-content_bottom">
+                                                        <h3 class="heading-xs">Limitless Creativity.</h3>
+                                                        <p class="paragraph-m">Harness the power of AI to generate
+                                                            breathtaking visuals and dynamic videos for your brand,
+                                                            marketing, or personal projects. Fast turnaround times with
+                                                            uncompromising quality.</p>
+                                                        <div class="button-wrap">
+                                                            <a href="#contact" class="button-default w-inline-block">
+                                                                <div class="button-default__inner"><span
+                                                                        class="button-default__background"></span><span
+                                                                        class="button-default__text">See Magic</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="listitem" class="expertises-item w-dyn-item" id="websites">
+                                        <div class="expertise-slide">
+                                            <div class="expertise-wrap">
+                                                <div class="expertise-content theme-white">
+                                                    <div class="expertise-content_top">
+                                                        <div class="label">
+                                                            <div class="paragraph-m">Online Presence</div>
+                                                        </div>
+                                                        <h2 class="expertise-content_heading">Custom Websites</h2>
+                                                    </div>
+                                                    <div class="expertise-content_img">
+                                                        <div class="medium-image">
+                                                            <video muted="" loop="" webkit-playsinline="" playsinline=""
+                                                                src="Media/THIS_IS_4K_KUNG_FU_PANDA.mp4" autoplay="true"
+                                                                class="video"></video>
+                                                        </div>
+                                                    </div>
+                                                    <div class="expertise-content_bottom">
+                                                        <h3 class="heading-xs">Scalable & Responsive.</h3>
+                                                        <p class="paragraph-m">From simple landing pages to complex web
+                                                            applications, our websites are built for speed, SEO, and
+                                                            massive conversions. Elevate your brand with a strong
+                                                            digital foundation.</p>
+                                                        <div class="button-wrap">
+                                                            <a href="#contact" class="button-default w-inline-block">
+                                                                <div class="button-default__inner"><span
+                                                                        class="button-default__background"></span><span
+                                                                        class="button-default__text">Build Yours</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div role="listitem" class="expertises-item w-dyn-item" id="projects">
+                                        <div class="expertise-slide">
+                                            <div class="expertise-wrap">
+                                                <div class="expertise-content theme-pink">
+                                                    <div class="expertise-content_top">
+                                                        <div class="label">
+                                                            <div class="paragraph-m">End to End</div>
+                                                        </div>
+                                                        <h2 class="expertise-content_heading">Startup Projects</h2>
+                                                    </div>
+                                                    <div class="expertise-content_img">
+                                                        <div class="medium-image">
+                                                            <video muted="" loop="" webkit-playsinline="" playsinline=""
+                                                                src="Media/Luca.mp4" autoplay="true"
+                                                                class="video"></video>
+                                                        </div>
+                                                    </div>
+                                                    <div class="expertise-content_bottom">
+                                                        <h3 class="heading-xs">Bring Ideas to Life.</h3>
+                                                        <p class="paragraph-m">Need an MVP, an internal tool, or a
+                                                            full-blown SaaS? We partner with startups to architect and
+                                                            build projects from the ground up, ensuring a smooth path to
+                                                            product-market fit.</p>
+                                                        <div class="button-wrap">
+                                                            <a href="#contact" class="button-default w-inline-block">
+                                                                <div class="button-default__inner"><span
+                                                                        class="button-default__background"></span><span
+                                                                        class="button-default__text">Let's Talk</span>
+                                                                </div>
+                                                            </a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+            <section id="contact"
+                style="padding: 120px 0; background-color: #0b0b0b; color: #fff; text-align: center; display: flex; flex-direction: column; align-items: center; justify-content: center; min-height: 50vh;">
+                <div class="padding-global">
+                    <h2 class="heading-m" style="margin-bottom: 2rem;">Ready to Elevate Your Startup?</h2>
+                    <p class="paragraph-m" style="max-width: 600px; margin: 0 auto 3rem; color: #aaa;">
+                        From dynamic portfolios and AI media to scalable websites and end-to-line projects, AIYOOO is
+                        here to bring your vision to life.
+                    </p>
+                    <a href="mailto:hello@aiyooo.com" class="button-default w-inline-block">
+                        <div class="button-default__inner"
+                            style="background-color: #fff; color: #000; padding: 15px 40px; border-radius: 50px; text-transform: uppercase; font-weight: bold; letter-spacing: 1px; display: inline-block;">
+                            <span class="button-default__text">Contact Us Today</span>
+                        </div>
+                    </a>
+                </div>
+            </section>
+        </div>
+    </div>
+    <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6848603da8e6ac95794b7498"
+        type="text/javascript" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0="
+        crossorigin="anonymous"></script>
+    <script src="https://cdn.prod.website-files.com/6848603da8e6ac95794b7498/js/webflow.schunk.36b8fb49256177c8.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/6848603da8e6ac95794b7498/js/webflow.schunk.db519b5efa062357.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/6848603da8e6ac95794b7498/js/webflow.c21519ad.ace93c705e4dac95.js"
+        type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.13.0/gsap.min.js" type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.13.0/ScrollTrigger.min.js" type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.13.0/SplitText.min.js" type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.13.0/Flip.min.js" type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.13.0/Observer.min.js" type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.13.0/Draggable.min.js" type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.13.0/InertiaPlugin.min.js" type="text/javascript"></script>
+    <script src="https://cdn.prod.website-files.com/gsap/3.13.0/Physics2DPlugin.min.js" type="text/javascript"></script>
+
+    <noscript>
+        <iframe src="https://www.googletagmanager.com/ns.html?id=GTM-P4PWHGBL" height="0" width="0"
+            style="display:none;visibility:hidden"></iframe>
+    </noscript>
+    <script>
+        if (window.innerWidth > 991) {
+            const container = document.querySelector('.titles_container');
+            const items = Array.from(container.querySelectorAll('.title_item')); // ONLY inside this container
+            let activeIndex = 0;
+            const itemHeight = items[0].offsetHeight;
+            const totalItems = items.length;
+            const intervalTime = 1500;
+
+            setActive(0);
+            gsap.set(container, { y: 0 });
+
+            function setActive(index) {
+                items.forEach((item, i) => {
+                    item.style.opacity = i === index ? 1 : 0.4;
+                });
+            }
+
+            function animateToIndex(index, duration = 0.5) {
+                gsap.to(container, {
+                    y: -index * itemHeight,
+                    duration: duration,
+                    ease: "power2.inOut",
+                });
+            }
+
+            function steppedOpacityCycleBack() {
+                const duration = 0.6;
+                gsap.to(container, {
+                    y: 0,
+                    duration: duration,
+                    ease: "back.out(1.2)",
+                    onComplete: () => setActive(0)
+                });
+            }
+
+            function nextStep() {
+                activeIndex++;
+                if (activeIndex >= totalItems) {
+                    activeIndex = 0;
+                    steppedOpacityCycleBack();
+                } else {
+                    animateToIndex(activeIndex);
+                    setActive(activeIndex);
+                }
+            }
+
+            setInterval(nextStep, intervalTime);
+        }
+    </script>
+    <script>
+        gsap.registerPlugin(ScrollTrigger)
+
+        window.addEventListener("DOMContentLoaded", () => {
+
+            gsap.to('.scroll', {
+                autoAlpha: 0,
+                duration: 0.2,
+                scrollTrigger: {
+                    trigger: '.mwg_effect031',
+                    start: 'top top',
+                    end: 'top top-=1',
+                    toggleActions: "play none reverse none"
+                }
+            })
+
+
+            const slides = document.querySelectorAll('.mwg_effect031 .expertise-slide')
+
+
+            slides.forEach((slide, index) => {
+
+                const isLast = index === slides.length - 1
+
+                const contentWrapper = slide.querySelector('.expertise-wrap')
+
+                const content = slide.querySelector('.expertise-content')
+
+
+                if (!isLast) {
+                    gsap.to(content, {
+
+                        rotationZ: (Math.random() - 0.5) * 10,
+
+                        scale: 0.7,
+
+                        rotationX: 40,
+
+                        ease: 'power1.in',
+
+                        scrollTrigger: {
+
+                            pin: contentWrapper,
+
+                            trigger: slide,
+
+                            start: 'top top',
+
+                            end: '+=' + window.innerHeight,
+
+                            scrub: true
+
+                        }
+
+                    })
+
+
+                    const pinDuration = window.innerHeight
+
+
+                    gsap.to(content, {
+
+                        autoAlpha: 0,
+
+                        ease: 'power1.inOut',
+
+                        scrollTrigger: {
+
+                            trigger: slide,
+
+                            start: `top+=${pinDuration * 0.75} top`,
+
+                            end: `top+=${pinDuration} top`,
+
+                            scrub: true
+
+                        }
+
+                    })
+
+                }
+
+            })
+
+        })
+    </script>
+    <script
+        src="https://cdn.prod.website-files.com/6848603da8e6ac95794b7498%2F66fd0e5033110309ff70869f%2F68c2c0d045b511f00b10d2cd%2Fleadinfo_trackingcode-1.1.1.js"
+        type="text/javascript"></script>
+</body>
+
+</html>
