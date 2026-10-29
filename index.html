@@ -7,6 +7,279 @@
     <link
         href="https://cdn.prod.website-files.com/6848603da8e6ac95794b7498/css/gethyped-preview.webflow.shared.6c2a2e206.min.css"
         rel="stylesheet" type="text/css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com/">
+    <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+    <link href="assets/css/fonts.css" rel="stylesheet">
+    <link href="assets/css/site-footer.css" rel="stylesheet">
+    <style>
+/* ===== BOOK TURN THE PAGES COMPONENT STYLES ===== */
+.book-section {
+  --page: #F6EEDC;
+  --page-2: #EFE4CC;
+  --ink: #4A3B2A;
+  --ink-soft: #8A7355;
+  --accent: #9B4A2F;
+  --cream: #E9E2D3;
+  --pad-y: clamp(24px, 3.2vw, 46px);
+  --pad-x: clamp(20px, 3.2vw, 46px);
+  --pad-b: clamp(46px, 5vw, 62px);
+  background: var(--cream);
+  font-family: 'Kalam', cursive;
+  color: #3E3A31;
+  position: relative;
+  overflow-x: hidden;
+  width: 100%;
+  clear: both;
+}
+
+.book-section * {
+  box-sizing: border-box;
+}
+
+/* ===== top bar ===== */
+.book-section .topbar { display: flex; justify-content: space-between; align-items: center; padding: 22px clamp(20px, 4vw, 56px); }
+.book-section .home-link {
+  font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(24px, 2.7vw, 34px);
+  color: #4A4233; text-decoration: none; display: inline-block; transition: transform .25s ease;
+}
+.book-section .home-link:hover { transform: translateX(-4px); }
+.book-section .brand { font-family: 'Oswald', sans-serif; font-weight: 600; letter-spacing: .25em; font-size: clamp(19px, 2vw, 25px); color: #4A4233; }
+
+.book-section .page-head { text-align: center; padding: clamp(8px, 1.6vw, 18px) 20px 0; }
+.book-section .page-head h1 {
+  font-family: 'Oswald', sans-serif; font-weight: 600; text-transform: uppercase; letter-spacing: .06em;
+  font-size: clamp(28px, 4.6vw, 52px); color: #4A4233; animation: rise .7s ease .1s backwards;
+}
+.book-section .page-head .hint {
+  font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(16px, 2.1vw, 25px);
+  color: #8A7F68; margin-top: 4px; animation: rise .7s ease .3s backwards;
+}
+@keyframes rise { from { opacity: 0; transform: translateY(16px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ===== desk ===== */
+.book-section .desk {
+  margin-top: clamp(20px, 3vw, 36px);
+  padding: clamp(34px, 5.5vw, 78px) clamp(14px, 3vw, 40px) clamp(44px, 6vw, 84px);
+  background:
+    repeating-linear-gradient(91deg, rgba(0,0,0,.06) 0 2px, transparent 2px 26px),
+    repeating-linear-gradient(90deg, rgba(255,255,255,.035) 0 1px, transparent 1px 90px),
+    linear-gradient(170deg, #7A5638, #5C3F2A 60%, #4C3423);
+}
+
+/* ===== book ===== */
+.book-section .stage { position: relative; z-index: 0; width: min(96vw, 1120px); margin: 0 auto; }
+.book-section .book {
+  position: relative;
+  z-index: 2; display: grid; grid-template-columns: 1fr 1fr;
+  border-radius: 6px; box-shadow: 0 40px 70px rgba(0,0,0,.45);
+  perspective: 2400px;
+  animation: open .9s cubic-bezier(.34,1.3,.64,1) .15s backwards;
+}
+@keyframes open {
+  from { opacity: 0; transform: perspective(1600px) rotateX(14deg) translateY(30px) scale(.96); }
+  to   { opacity: 1; transform: none; }
+}
+.book-section .pg {
+  position: relative; background: var(--page);
+  padding: var(--pad-y) var(--pad-x) var(--pad-b);
+  overflow: hidden;
+}
+.book-section .pg.left  { border-radius: 6px 0 0 6px; box-shadow: inset -26px 0 34px -22px rgba(90,64,38,.5); }
+.book-section .pg.right { border-radius: 0 6px 6px 0; box-shadow: inset  26px 0 34px -22px rgba(90,64,38,.5); background: var(--page-2); }
+.book-section .book::before {
+  content: ''; position: absolute; left: 50%; top: 0; bottom: 0; width: 26px; transform: translateX(-50%);
+  background: linear-gradient(90deg, rgba(120,90,58,0), rgba(120,90,58,.28) 45%, rgba(120,90,58,.28) 55%, rgba(120,90,58,0));
+  z-index: 6; pointer-events: none;
+}
+.book-section .book::after {
+  content: ''; position: absolute; inset: 6px -7px -8px -7px;
+  background: linear-gradient(90deg, #DCCFB2, #EFE5CD 6%, #EFE5CD 94%, #DCCFB2);
+  border-radius: 6px; z-index: -1; box-shadow: 0 6px 0 -1px #E4D8BE, 0 12px 0 -2px #D8CAAE;
+}
+
+.book-section .turn {
+  position: absolute; top: 0; right: 0; width: 50%; height: 100%;
+  transform-origin: left center; transform-style: preserve-3d;
+  pointer-events: none; z-index: 7; display: none;
+}
+.book-section .turn.on { display: block; }
+.book-section .face { position: absolute; inset: 0; backface-visibility: hidden; overflow: hidden; padding: var(--pad-y) var(--pad-x) var(--pad-b); }
+.book-section .face.front { background: var(--page-2); border-radius: 0 6px 6px 0; box-shadow: inset 26px 0 34px -22px rgba(90,64,38,.5); }
+.book-section .face.back  { background: var(--page); border-radius: 6px 0 0 6px; transform: rotateY(180deg); box-shadow: inset -26px 0 34px -22px rgba(90,64,38,.5); }
+@keyframes fwd { from { transform: rotateY(0); }       to { transform: rotateY(-180deg); } }
+@keyframes bwd { from { transform: rotateY(-180deg); } to { transform: rotateY(0); } }
+.book-section .turn.fwd { animation: fwd .6s cubic-bezier(.45,.05,.35,1) forwards; }
+.book-section .turn.bwd { animation: bwd .6s cubic-bezier(.45,.05,.35,1) forwards; }
+
+/* bookmark tabs tucked between the pages, sticking out of the right edge */
+.book-section .ribbons {
+  --rw: clamp(80px, 9.6vw, 114px);
+  position: absolute;
+  top: clamp(60px, 10vw, 124px);
+  right: calc(20px - var(--rw));   /* the left 20px hides behind the page */
+  display: flex; flex-direction: column; gap: clamp(8px, 1.2vw, 13px);
+  z-index: 1;                      /* behind .book */
+}
+.book-section .ribbon {
+  width: var(--rw);
+  height: clamp(25px, 3vw, 34px);
+  padding: 0 13px 0 24px;
+  display: flex; align-items: center; justify-content: center;
+  background: none; border: none; cursor: pointer;
+  font-family: 'Caveat', cursive; font-weight: 700;
+  font-size: clamp(11px, 1.2vw, 15px); color: #FBF3E2; line-height: 1;
+  clip-path: polygon(0 0, 100% 0, 86% 50%, 100% 100%, 0 100%);
+  box-shadow: 3px 3px 8px rgba(0,0,0,.3);
+  transition: transform .28s cubic-bezier(.34,1.56,.64,1);
+}
+.book-section .ribbon:hover { transform: translateX(10px); }
+.book-section .ribbon.on { transform: translateX(15px); }
+.book-section .r1 { background: linear-gradient(#C46A46, #A3512F); }
+.book-section .r2 { background: linear-gradient(#B4763F, #97602F); }
+.book-section .r3 { background: linear-gradient(#7C9463, #5E7649); }
+.book-section .r4 { background: linear-gradient(#5E8C8A, #47706E); }
+.book-section .r5 { background: linear-gradient(#8A6EA0, #6E5583); }
+.book-section .r6 { background: linear-gradient(#C9A24D, #A88136); }
+
+/* furniture */
+.book-section .pgno {
+  position: absolute; bottom: clamp(14px, 2vw, 22px);
+  font-family: 'Kalam', cursive; font-weight: 300; font-size: clamp(11px, 1.2vw, 14px); color: var(--ink-soft);
+}
+.book-section .pg.left .pgno, .book-section .face.back .pgno { left: var(--pad-x); }
+.book-section .pg.right .pgno, .book-section .face.front .pgno { right: var(--pad-x); }
+.book-section .runhead {
+  position: absolute; top: clamp(10px, 1.4vw, 16px);
+  font-family: 'Kalam', cursive; font-weight: 300; font-size: clamp(10px, 1.05vw, 12px);
+  letter-spacing: .12em; text-transform: uppercase; color: rgba(138,115,85,.75);
+}
+.book-section .pg.left .runhead, .book-section .face.back .runhead { left: var(--pad-x); }
+.book-section .pg.right .runhead, .book-section .face.front .runhead { right: var(--pad-x); }
+
+.book-section .corner { position: absolute; bottom: 0; right: 0; width: clamp(50px, 6.5vw, 80px); height: clamp(50px, 6.5vw, 80px); cursor: pointer; z-index: 5; border: none; background: none; }
+.book-section .corner::after {
+  content: ''; position: absolute; inset: 0; opacity: .45;
+  background: linear-gradient(315deg, rgba(190,166,124,.55) 0 42%, transparent 42%);
+  border-radius: 0 0 6px 0; transition: transform .25s ease, opacity .25s ease;
+}
+.book-section .corner:hover::after { opacity: 1; transform: scale(1.12); }
+
+.book-section .desk .nav {
+  position: absolute; top: 50%; transform: translateY(-50%);
+  width: clamp(42px, 5vw, 58px); height: clamp(42px, 5vw, 58px);
+  border-radius: 50%; border: 2px solid rgba(251,243,226,.5);
+  background: rgba(40,26,16,.42); color: #FBF3E2;
+  font-size: clamp(18px, 2.2vw, 26px); cursor: pointer; z-index: 9;
+  display: flex; align-items: center; justify-content: center;
+  transition: transform .25s ease, background .25s ease, opacity .25s ease;
+}
+.book-section .desk .nav:hover:not(:disabled) { transform: translateY(-50%) scale(1.1); background: rgba(40,26,16,.65); }
+.book-section .desk .nav:disabled { opacity: .22; cursor: default; }
+.book-section .desk .nav.prev { left: -26px; }
+.book-section .desk .nav.next { right: -26px; }
+@media (max-width: 1240px) { .book-section .desk .nav.prev { left: 8px; } .book-section .desk .nav.next { right: 8px; } }
+
+/* ---- contents ---- */
+.book-section .head { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(26px, 3.8vw, 44px); color: var(--ink); line-height: 1; }
+.book-section .dateline {
+  font-family: 'Kalam', cursive; font-weight: 300; font-size: clamp(11px, 1.3vw, 15px);
+  color: var(--ink-soft); margin-top: 4px; padding-bottom: 10px; border-bottom: 2px solid rgba(138,115,85,.3);
+}
+.book-section .toc { list-style: none; margin-top: clamp(8px, 1.4vw, 16px); }
+.book-section .toc li { margin-bottom: clamp(4px, .8vw, 9px); }
+.book-section .toc button {
+  width: 100%; background: none; border: none; cursor: pointer;
+  display: flex; align-items: baseline; gap: 8px; padding: 4px 8px 5px; border-radius: 6px;
+  text-align: left; color: var(--ink);
+  font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(15px, 1.85vw, 22px);
+  transition: background .22s ease, transform .22s ease;
+}
+.book-section .toc button:hover { background: rgba(155,74,47,.09); transform: translateX(4px); }
+.book-section .toc .num { font-family: 'Kalam', cursive; font-weight: 700; font-size: .6em; color: var(--accent); min-width: 2.2em; }
+.book-section .toc .dots { flex: 1; border-bottom: 2px dotted rgba(138,115,85,.55); transform: translateY(-5px); }
+.book-section .toc .p { font-family: 'Kalam', cursive; font-weight: 400; font-size: .56em; color: var(--ink-soft); }
+.book-section .toc .sub {
+  font-family: 'Kalam', cursive; font-weight: 300; font-size: clamp(10px, 1.1vw, 13px);
+  color: var(--ink-soft); padding: 0 8px 4px 3.1em;
+}
+.book-section .sec-label {
+  font-family: 'Kalam', cursive; font-weight: 700; font-size: clamp(10px, 1.05vw, 12px);
+  letter-spacing: .22em; text-transform: uppercase; color: var(--ink-soft); margin: clamp(8px, 1.3vw, 15px) 0 3px;
+}
+
+/* ---- section divider ---- */
+.book-section .divider { display: flex; flex-direction: column; height: 100%; justify-content: center; text-align: center; align-items: center; }
+.book-section .divider .num2 { font-family: 'Kalam', cursive; font-weight: 700; font-size: clamp(10px, 1.1vw, 13px); letter-spacing: .3em; text-transform: uppercase; color: var(--accent); }
+.book-section .divider h2 { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(28px, 4.2vw, 48px); line-height: 1.02; color: var(--ink); margin: 6px 0 4px; }
+.book-section .divider .rule { width: 54%; height: 2px; background: rgba(138,115,85,.4); margin: 10px 0 14px; }
+.book-section .divider .snap { position: relative; background: #fff; padding: 8px 8px 22px; box-shadow: 0 10px 20px rgba(80,55,30,.3); transform: rotate(-1.6deg); width: min(82%, 270px); }
+.book-section .divider .snap img { width: 100%; aspect-ratio: 4/3; object-fit: cover; display: block; background: #E7E0D0; }
+.book-section .divider .snap .cap { position: absolute; left: 0; right: 0; bottom: 3px; text-align: center; font-family: 'Caveat', cursive; font-weight: 700; font-size: 14px; color: var(--ink-soft); }
+.book-section .divider .snap::before, .book-section .divider .snap::after {
+  content: ''; position: absolute; width: 52px; height: 18px;
+  background: rgba(240,225,190,.78); box-shadow: 0 1px 3px rgba(80,55,30,.25);
+}
+.book-section .divider .snap::before { top: -8px; left: -12px; transform: rotate(-36deg); }
+.book-section .divider .snap::after  { top: -8px; right: -12px; transform: rotate(36deg); }
+.book-section .divider .blurb { font-family: 'Kalam', cursive; font-weight: 300; font-size: clamp(12px, 1.35vw, 16px); color: var(--ink-soft); margin-top: 16px; max-width: 30ch; line-height: 1.7; }
+.book-section .divider .count { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(14px, 1.6vw, 19px); color: var(--accent); margin-top: 10px; }
+
+/* ---- article ---- */
+.book-section .a-title { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(22px, 3.1vw, 36px); line-height: 1.05; color: var(--ink); }
+.book-section .a-by { font-family: 'Kalam', cursive; font-weight: 700; font-size: clamp(11px, 1.2vw, 14px); letter-spacing: .14em; text-transform: uppercase; color: var(--accent); margin-top: 4px; padding-bottom: 8px; border-bottom: 1px solid rgba(138,115,85,.35); margin-bottom: 10px; }
+.book-section .a-body { font-family: 'Kalam', cursive; font-weight: 300; font-size: clamp(12.5px, 1.36vw, 16.5px); line-height: 1.82; color: #4B4234; text-align: justify; hyphens: auto; }
+.book-section .a-body p + p { margin-top: .7em; text-indent: 1.4em; }
+.book-section .a-body.first p:first-child::first-letter {
+  font-family: 'Caveat', cursive; font-weight: 700; font-size: 2.5em;
+  float: left; line-height: .78; margin: 6px 8px 0 0; color: var(--accent);
+}
+.book-section .cont { font-family: 'Kalam', cursive; font-weight: 300; font-style: italic; font-size: clamp(10px, 1.1vw, 13px); color: var(--ink-soft); text-align: right; margin-top: 6px; }
+
+/* ---- end ---- */
+.book-section .endpg { display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100%; text-align: center; gap: 10px; }
+.book-section .endpg .fin { font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(32px, 4.8vw, 56px); color: var(--ink); }
+.book-section .endpg .note { font-family: 'Kalam', cursive; font-weight: 300; font-size: clamp(12px, 1.4vw, 16px); color: var(--ink-soft); max-width: 32ch; line-height: 1.7; }
+.book-section .endpg .again {
+  margin-top: 12px; background: none; border: none; cursor: pointer;
+  font-family: 'Caveat', cursive; font-weight: 700; font-size: clamp(16px, 1.9vw, 22px);
+  color: var(--accent); border-bottom: 2px dashed rgba(155,74,47,.5);
+}
+
+/* measuring clone, never visible */
+.book-section #measure { position: absolute; visibility: hidden; pointer-events: none; left: -9999px; top: 0; }
+
+/* desk props tucked over the top-left corner of the book */
+.book-section .props {
+  position: absolute;
+  --avail: calc((100vw - min(96vw, 1120px)) / 2);
+  --gap: clamp(10px, 1.2vw, 26px);
+  --pw: min(210px, calc(var(--avail) - var(--gap) - 10px));
+  left: calc(-1 * var(--pw) - var(--gap));
+  top: clamp(10px, 2vw, 30px);
+  width: var(--pw);
+  z-index: 6;
+  pointer-events: none;
+  filter: drop-shadow(0 9px 13px rgba(0,0,0,.42));
+  animation: props-in .8s cubic-bezier(.34,1.3,.64,1) .45s backwards;
+}
+.book-section .props svg { width: 100%; height: auto; display: block; overflow: visible; }
+@keyframes props-in {
+  from { opacity: 0; transform: translate(-16px, -20px) rotate(-8deg); }
+  to   { opacity: 1; transform: none; }
+}
+@media (max-width: 1380px) { .book-section .props { display: none; } }
+
+@media (prefers-reduced-motion: reduce) { .book-section * { animation: none !important; transition: none !important; } }
+@media (max-width: 760px) {
+  .book-section .book { grid-template-columns: 1fr; }
+  .book-section .book::before { display: none; }
+  .book-section .turn { display: none !important; }
+  .book-section .pg.left  { border-radius: 6px 6px 0 0; box-shadow: none; }
+  .book-section .pg.right { border-radius: 0 0 6px 6px; box-shadow: none; border-top: 2px dashed rgba(138,115,85,.35); }
+  .book-section .ribbons { right: calc(6px - var(--rw)); top: 44px; }
+}
+
+    </style>
 </head>
 
 <body color-mode="">
@@ -280,6 +553,15 @@
                         </span>
                         <span data-text="Projects" class="button-color-swoosh_inner"><span
                                 class="button-color-swoosh_text">Projects</span></span>
+                    </a>
+                    <a aria-label="Stories link" role="Link" href="#book-turn"
+                        class="button-color-swoosh is-menu w-inline-block">
+                        <span class="button-color-swoosh_bg">
+                            <span STYLE="--index: 0" class="button-color-swoosh_bg-inner is-first"></span>
+                            <span STYLE="--index: 1" class="button-color-swoosh_bg-inner is-second"></span>
+                        </span>
+                        <span data-text="Stories" class="button-color-swoosh_inner"><span
+                                class="button-color-swoosh_text">Stories</span></span>
                     </a>
                     <a aria-label="Contact link" role="Link" href="#contact"
                         class="button-color-swoosh is-menu w-inline-block">
@@ -560,6 +842,96 @@
                     </a>
                 </div>
             </section>
+
+            <!-- Book Turn The Pages Section -->
+            <section id="book-turn" class="book-section">
+                <div class="topbar">
+                    <a class="home-link" href="#section_hero">← Back to Top</a>
+                    <div class="brand">SOTZ &times; AIYOOO</div>
+                </div>
+
+                <div class="page-head">
+                    <h1>Writing &amp; Stories</h1>
+                    <div class="hint">Turn the pages, click a tab, or explore our journey</div>
+                </div>
+
+                <div class="desk">
+                    <div class="stage">
+                        <button class="nav prev" id="prev" aria-label="Previous page">‹</button>
+                        <button class="nav next" id="next" aria-label="Next page">›</button>
+
+                        <div class="ribbons" id="ribbons"></div>
+
+                        <div class="book" id="book">
+                            <div class="pg left" id="pgL"></div>
+                            <div class="pg right" id="pgR"></div>
+                            <div class="turn" id="turn">
+                                <div class="face front" id="faceF"></div>
+                                <div class="face back" id="faceB"></div>
+                            </div>
+                            <div class="pg" id="measure"></div>
+                        </div>
+                        <div class="props" aria-hidden="true">
+                            <svg viewBox="0 0 230 760">
+                                <!-- ruler, standing on its end -->
+                                <g transform="rotate(4 42 420)">
+                                    <rect x="16" y="150" width="52" height="540" rx="4" fill="#EBD9A8"></rect>
+                                    <rect x="16" y="150" width="16" height="540" rx="4" fill="#F5E9C6"></rect>
+                                    <g stroke="#9C8A55" stroke-width="2.6" stroke-linecap="round">
+                                        <path d="M16 186 h22 M16 222 h13 M16 258 h22 M16 294 h13 M16 330 h22 M16 366 h13
+                                                 M16 402 h22 M16 438 h13 M16 474 h22 M16 510 h13 M16 546 h22 M16 582 h13
+                                                 M16 618 h22 M16 654 h13"></path>
+                                    </g>
+                                </g>
+
+                                <!-- pencil, running down the page -->
+                                <g transform="rotate(-6 146 380) translate(146 408) scale(0.66) translate(-146 -408)">
+                                    <path d="M114 152 L146 96 L178 152 Z" fill="#E8D3AE"></path>
+                                    <path d="M134 118 L146 96 L158 118 Z" fill="#3A332A"></path>
+                                    <rect x="114" y="150" width="64" height="470" fill="#D9A23A"></rect>
+                                    <rect x="114" y="150" width="21" height="470" fill="#F0C96A"></rect>
+                                    <rect x="157" y="150" width="21" height="470" fill="#B9862A"></rect>
+                                    <rect x="112" y="618" width="68" height="56" fill="#B9BFC4"></rect>
+                                    <rect x="112" y="618" width="68" height="18" fill="#D6DBDF"></rect>
+                                    <g stroke="#8F979E" stroke-width="2.4"><path d="M112 640 h68 M112 656 h68"></path></g>
+                                    <rect x="116" y="670" width="60" height="50" rx="16" fill="#E88C8C"></rect>
+                                    <rect x="116" y="670" width="60" height="18" rx="9" fill="#F2A9A9"></rect>
+                                </g>
+
+                                <!-- paperclips -->
+                                <g transform="translate(-4 -18) rotate(18 50 726) translate(50 726) scale(0.625) translate(-50 -726)" fill="none" stroke="#9AA3AB" stroke-width="7" stroke-linecap="round">
+                                    <path d="M34 692 v46 a16 16 0 0 0 32 0 v-54 a21 21 0 0 0 -42 0 v58"></path>
+                                </g>
+                                <g transform="translate(-30 4) rotate(-24 100 740) translate(100 740) scale(0.625) translate(-100 -740)" fill="none" stroke="#C9A24D" stroke-width="7" stroke-linecap="round">
+                                    <path d="M90 706 v38 a14 14 0 0 0 28 0 v-46 a18 18 0 0 0 -36 0 v50"></path>
+                                </g>
+
+                                <!-- eraser -->
+                                <g transform="translate(-20 -30) rotate(-10 162 726) translate(162 726) scale(1.5) translate(-162 -726)">
+                                    <rect x="116" y="700" width="92" height="52" rx="7" fill="#F4F1E5"></rect>
+                                    <rect x="116" y="700" width="92" height="18" rx="7" fill="#FCFAF1"></rect>
+                                    <rect x="130" y="700" width="64" height="52" fill="#5E8C8A"></rect>
+                                    <rect x="130" y="700" width="64" height="18" fill="#74A3A1"></rect>
+                                    <text x="162" y="735" text-anchor="middle" font-family="Oswald, sans-serif" font-size="15" letter-spacing="2" fill="#EAF2F1">SOTZ</text>
+                                </g>
+                            </svg>
+                        </div>
+                    </div>
+                </div>
+
+                <footer class="site-footer">
+                    <div class="fbrand">SOTZ</div>
+                    <div class="ftag">Shout Out to Zanzibar</div>
+                    <nav class="flinks" aria-label="Footer navigation">
+                        <a href="#section_hero">Home</a>
+                        <a href="#portfolio">Portfolio</a>
+                        <a href="#projects">Projects</a>
+                        <a href="#contact">Contact</a>
+                        <a href="https://www.instagram.com/shout_out_to_zanzibar/" target="_blank" rel="noopener noreferrer">Instagram</a>
+                    </nav>
+                </footer>
+            </section>
+
         </div>
     </div>
     <script src="https://d3e54v103j8qbb.cloudfront.net/js/jquery-3.5.1.min.dc5e7f18c8.js?site=6848603da8e6ac95794b7498"
@@ -723,6 +1095,314 @@
     <script
         src="https://cdn.prod.website-files.com/6848603da8e6ac95794b7498%2F66fd0e5033110309ff70869f%2F68c2c0d045b511f00b10d2cd%2Fleadinfo_trackingcode-1.1.1.js"
         type="text/javascript"></script>
+    <script>
+var SECTIONS = [{"short": "Purpose", "title": "Motivation & Our Purpose", "cap": "why we started", "img": "assets/images/motivation_and_purpose.png", "blurb": "Why each of us joined, and what we are actually trying to do here.", "arts": [{"title": null, "author": "Yoonjea Park", "body": "I decided to take action to help the people for the remainder of my high school career after seeing Tanzania and Zanzibar, particularly the less affluent areas. The voluntary work I undertook in Zanzibar, such as teaching children, was a wonderful opportunity for me to broaden my understanding of community service. After returning from the volunteer work, I had a better understanding of people in Korea and other nations. When I was looking for the best approach to help the people of Zanzibar in Korea, I found that the SOTZ club was the best option because we share the same objective. Even while I'm in South Korea, I aim to contribute to the SOTZ club by sharing my Tanzanian experience and working with others to better Zanzibar. One aspect of this group that I found appealing is that most of the members had been to Tanzania together, which makes it perfect for concentrating on the shared objective of helping Zanzibar."}, {"title": null, "author": "Jungwoo Lee", "body": "I learned HTML, CSS, PHP, and HTML, which I used to make a website for two years. Making and updating a website is a lot of work, so I thought I could manage the SOTZ website. I thought it would be a good experience for me to work on the website. Throughout this semester, I want to recreate the SOTZ website so that it looks much better than before. I aim to add additional details to the website. An example of this would be that I would like to have straightforward animations for the texts and pictures that appear when we visit the website. Also, I want to add a dark mode to the website because many people are using dark mode these days. Before the semester ends, I want to upload the SOTZ website to the internet so others can see it anytime they want on Google. I will put in significant effort for the SOTZ club."}, {"title": null, "author": "Seonghyeon Ju", "body": "For the previous semester, I have joined this club so that I can support Tanzania. However, I have different goals this semester. For the previous semester, I did not go to school and do anything. However, for this year, I will try to go to school and try to be useful. I am currently in the group that fundraises 50 million won. My ultimate goal is to make “50,000,000 won project” successful so that it can be a huge support for the missionary in Zanzibar. I will suggest several ideas that are useful in real life situations and show the reason why people need to donate money for this club so that the money can be used for the missionary of Tanzania. If I work effortlessly, I will just leave the club due to my lack of enthusiasm. I wish our group finishes this project successfully in order to see the safer condition of Hope School. This project might not be easy but I know that it is possible."}, {"title": null, "author": "Seungli Namgung", "body": "Through SOTZ, I want to comprehend a deeper understanding about the African population. When I went on a vision trip to Tanzania for volunteering, I felt numerous things. Incredibly different environment of Tanzania made me interested in international culture. Through it, I realized that in this world, there are numerous things I do not know about the world yet. Also, I found that by experiencing and helping Tanzanian kids through volunteer work, I can deeply understand Tanzanians’ lives in general. I joined SOTZ, because I volunteered in Tanzania. In January of 2025, I served Tanzanian locals. I drew murals at school, even taught Tanzanian kids. By seeing the Tanzanian population, I found out that I am able to help them in many parts of their lives. From these experiences, I felt that I want to continue to support Tanzanians by using my strength. Therefore, I saw the opportunity to aid Tanzanians in SOTZ. I am sure that I would be able to make a positive change on Tanzania in this club."}, {"title": null, "author": "Ashley Lee", "body": "The primary reason why I joined this club is to make a difference. This is my second year in SOTZ, and during the first year, I experienced new skills and felt emotions that I wouldn’t have felt if I wasn’t in our club. As the new treasurer, I felt nervous and burdened since it was an important position where I had to accomplish many tasks. But after the first half a year of working hard with my club members and accomplishing what we planned, I felt proud of what we’ve done, and seeing the pictures of the children who got our gifts made me more proud. So this year I want to do the same thing, I want to try my best as the club treasurer and help organize our club to accomplish something that we’ve planned and make a difference to those who need it so in the future we can make a difference together."}, {"title": null, "author": "Jiwoo Hong", "body": "During my Tanzania trip, I continuously questioned myself \"Can I also live like them?\" and answered \"No.\" I was not confident about living in a village with no color on the wall or education system. So, I wanted to make the village itself a better place. As providing an environment like Korea in 3 weeks is impossible, I tried my best in education, which I believed is the most important to children. Looking at children enjoying games that we prepared was significantly memorable. Also, I tried my best to paint the walls so students could study in colorful buildings. But 3 weeks were not enough. I wanted them to live in a better place. After I came back to Korea, I thought about how I make their life at least slightly better. Then, I heard SOTZ can help the children in Tanzania and I can be helpful to them. What I want to achieve with this club is simple. I just want to see those pure eyes of children when I go to Tanzania ever again. But, I will do my best to make them smile in a much better environment. When I go to Tanzania again and see those children laughing with the same eyes as when I saw the last, my goal is fully fulfilled. Therefore, I joined SOTZ."}, {"title": null, "author": "Seoyoung Lee", "body": "Although I have never physically stepped foot to Tanzania or personally connected with the children there, I have always been deeply passionate about supporting the well-being of young children in need and helping them thrive. Hearing the heartfelt stories from my peers who have visited, I felt an undeniable pull to be part of something greater; a community dedicated to uplifting children in need, making small and big changes to the world bit by bit. The thought that my efforts to this club could really make a difference gave more of a purpose to progress through this journey I will take forth through my membership. As it continues, I hope not only to make meaningful experiences, but contribute to a lasting change that I believe this club will make, and positively impact the lives of these children. And one day, if possible, I would so love to visit the beautifully vibrant and loving country that my friends had described with such passion and vigor."}]}, {"short": "Motive", "title": "Apply Motivation to SOTZ", "cap": "what keeps us going", "img": "assets/images/enhancing_experience.png", "blurb": "What motivates us day to day, and how that motivation gets carried into the club.", "arts": [{"title": null, "author": "Audrey Seo", "body": "What motivates me to strive for the better in my day life is the belief that becoming a better person is the minimum respect a person can give to themselves. I think it is important to appreciate the opportunities and blessings we are given in life. Since we are all given one life and our own unique identity, I believe it would be meaningless to simply stay the same without trying to grow or improve. Being grateful naturally encourages me to work harder and become a better version of myself every day. I also believe that the more I improve myself, the greater positive impact I can have on the world and the people around me. Even though one person’s actions may seem small, kindness, and responsibility can strongly influence others. Small actions and small efforts can eventually create meaningful change. That is why I try to live with a sincere heart and always do my best in the things I commit to. I believe this motivation can also help me contribute positively to the SOTZ. With sincerity, responsibility, and consistency, I hope to support the children and help create a better environment for them. Even if my contribution seems small, I believe small acts of care and dedication can bring hope and encouragement to others."}, {"title": null, "author": "Gain Kang", "body": "What motivates me to strive for the better in my day-to-day life is my desire to grow and improve myself little by little. I believe that even small efforts made consistently can lead to meaningful change. When I set a goal, I feel motivated to work toward it because reaching that goal gives me a sense of accomplishment and confidence. For example, when I practice a skill or study something challenging, I remind myself that improvement takes time and effort. This mindset helps me stay focused and encourages me to keep trying even when something feels difficult at first. Another important motivation for me is the idea that my efforts can positively affect others around me. When I work hard and show dedication, it can inspire people around me to also try their best. Seeing others grow and succeed can be just as rewarding as achieving my own goals. Because of this, I try to maintain a positive attitude and support others when they are working toward their goals as well. I believe this motivation can be applied to our club in several ways. First, I would bring a mindset of continuous improvement. I would try to actively participate, contribute ideas, and work hard to help the club achieve its goals. Second, I would encourage collaboration and teamwork. By supporting other members and sharing ideas, we can create a more positive and productive environment. Finally, I would apply my motivation by staying committed and responsible. Being reliable, participating regularly, and putting effort into club activities can help the club grow stronger. Through dedication and teamwork, I believe our club can achieve meaningful results while also helping its members develop new skills and confidence."}, {"title": null, "author": "Hyeon Ju", "body": "My daily motivation comes from my two trips to Tanzania. Before my first visit, I only had a vague idea about helping others. That changed completely after I met the children there. They face many difficult problems, but they still wake up every day with a strong desire to learn and build a better future. Seeing their strength changed how I look at success. Whenever I feel like giving up on my own work, I remember the look in their eyes. They are my biggest source of energy and the reason why I keep pushing myself to do better every day. I want to bring this same motivation to our club. I do not want to just do simple, one-time volunteer work. Because I have spent time in Tanzania, I know what kind of help actually makes a difference. I know which support systems really work and which ones do not help much in the long run. I want to use my experience to help our club create projects that last for a long time. I do not want to just offer my time; I want to offer ideas that really help. By connecting what I saw in Tanzania with what our club does, I will make sure our efforts create real progress. I am ready to turn my experiences into action and help our club grow. I want to prove that my time in Tanzania can bring real value to all of us."}, {"title": null, "author": "Lime Lee", "body": "Honestly, what motivates me in my daily life is pretty simple. I don’t want to disappoint the people around me, especially my parents. They work really hard to give me good opportunities, so I feel like I have to at least try my best in whatever I do. It is not always about big goals or dreams. Sometimes it is just about not wasting the chance I have. That feeling of not wanting to let people down pushes me to keep going even when I am tired or don’t feel like doing something. Also, I get motivated when I see small progress. Like when I study and I finally understand something difficult, or when I finish a task I was avoiding for a long time. Those small moments make me want to continue. I think motivation doesn’t always have to come from something big or inspiring. For me, it usually comes from small things in everyday life. actually raise some money, even a small amount, it feels like we did something real. That feeling motivates me to join again next time. I also think about the children in Zanzibar and how the things we do, even small ones like fundraising events, can actually matter to them. So I want to keep showing up and contributing the way I can as a regular member."}, {"title": null, "author": "Seungli Namgung", "body": "A better future motivates me day to day. When I wake up every morning, I sincerely do not want to go school though, I still go for my grade. Since I believe that better grades lead me to a better future, I just persist day by day even though it is rough. Even if my future is not sure, I believe that there will be happiness at the end of those hardships. I personally think that this feeling would be able to apply to the children in Tanzania. They want their family to be happy, their friends to be happy, and themselves to be happy. Nevertheless, I feel so sorry for the kids who cannot even get any opportunity for an improved future due to their environment. Therefore, it motivates me to work harder for the children in Tanzania to provide them a better future. Even if my contribution would be very tiny, I do believe that those tiny contributions eventually lead to a huge miracle. That is the reason why I think that SOTZ is the best opportunity make that huge impact. Therefore, I want to do the best I can to make positive effects on Tanzania even though it would be small, and even it seems to be negligible."}, {"title": null, "author": "Ashley Lee", "body": "As a high school student, it is not easy to find motivation to strive better in day to day life. And to sustain a productive academic life, motivation is crucial for me. So in search of motivation, I try to observe my surroundings. I try to notice details in daily life that I couldn’t see regularly. While observing, I don’t try to think the nitty gritty thoughts that scour through my head, resting my presence to my surroundings. This helps me to be thankful for what I have and clear my head before setting a goal for myself, motivating me to go on. By using this method of motivation, I want to manage unforeseen events with calmness, regulating situations with collaboration and setting a clear goal for us. In projects or proposals, nothing goes as expected. And I think the unexpectedness of clubs or organizations is a proponent that develops us. As being in a leadership position, I want to lead with amity, using my way of motivation to motivate others to coordinate issues and work towards a united goal."}, {"title": null, "author": "Jiwoo Hong", "body": "What motivates me to strive for better in my daily life is the belief that even small actions can create meaningful change. I have always believed that effort matters, especially when it helps others. Even if something seems small at first, consistent work and dedication can eventually make a big impact. This mindset pushes me to improve myself every day, whether it is in school, leadership positions, or volunteer activities. Another motivation for me is responsibility. When I take a role or commit to something, I want to do it properly and give my best effort. I do not like leaving work unfinished or doing the minimum because I believe every responsibility affects other people as well. This motivates me to become more organized, dependable, and hardworking in my daily life. I can apply this motivation to SOTZ by contributing actively and responsibly as a member and secretary. I want to help organize projects, support donation drives, assist with fundraising events, and make sure communication within the club runs smoothly. Since our club works to support students and communities in Tanzania, I believe dedication and teamwork are very important. Most importantly, I want to remember that our work goes beyond school activities. The projects we complete may directly help children and communities, and that motivates me to continue working for something bigger than myself."}]}, {"short": "Plans", "title": "Planning to Contribute to SOTZ", "cap": "the plan for this term", "img": "assets/images/tour_in_tanzania.png", "blurb": "What each member plans to do this semester, and the work we are taking on.", "arts": [{"title": null, "author": "Audrey Seo", "body": "This semester, I plan to contribute to SOTZ with all my heart and effort. Since this is my first time joining, I feel very excited and grateful for this opportunity. At the same time, I also feel a strong heart of responsibility because I believe helping improve children’s futures and daily lives is extremely important. Even small acts of kindness and support can become a source of hope for them. I want to work hard not only physically but also emotionally to support the children. I hope to stay by their side, encourage them, and make them feel loved and valued. I believe that when children receive care and attention, they can gain confidence and dream bigger for their future. I truly want to contribute positively to the SOTZ community by cooperating well with other members, learning from experienced people, and always maintaining a respectful and caring attitude. Since I am new, I know there are many things I still need to learn, but I am willing to give my best effort and grow throughout this semester."}, {"title": null, "author": "Hyeon Ju", "body": "SOTZ is a club that supports the living conditions of the children in Tanzania, especially Tanzibar. Our club has done several fundraisings and projects such as collecting 10M won, creating the textbook for the human capital, and etc. This club also has several roles such as social media manager, secretary, meeting recorder, and etc. I used to be a member of SOTZ when I was in this club in 2025. Now I am a social manager who needs to promote what Tanzania is and draw attention from the new viewers who are not interested in the SOTZ club and the beauty of Zanzibar. In my position, I need to take videos of Swahili education videos. Swahili is a language that Tanzania citizens primarily use. Since swahili is not known to people as much as thought, I will make videos that are fun, educational, and memory-reminder that lasts at least several years so that you might want to use it one day in the future. Taking Swahili educational videos may be easy but the purpose of social media position is to promote and make education fun. I won’t create any video that is expectable, dull, typical, or maybe memes that could be normally seen."}, {"title": null, "author": "Lime Lee", "body": "This semester, I am planning to contribute to SOTZ by participating in fundraising activities like I did before. I already joined fundraising events a few times, so I want to continue doing that and maybe help more than before. I think fundraising is very important for SOTZ because the club needs money to support children in Zanzibar, Tanzania. Without enough funding, it is hard to do anything meaningful for them. Also, I want to learn more about what SOTZ is actually doing for the children there. I know the mission of the club is not just about showing how poor the children are, but more about sharing their stories and showing that they have so much potential and value. I think this is a really good message and I want to understand it better so I can explain it to other people when we are doing fundraising. Sometimes when we ask people for donations, they ask questions about the club, and I want to be able to answer properly. I am not a leader in the club, but I believe that even regular members like me can make a difference by showing up and helping when there are events. I will try to be more active this semester and not just attend, but also encourage my friends to join or at least know about what SOTZ is doing."}, {"title": null, "author": "Seungli Namgung", "body": "In SOTZ this semester, I will do my best to do my best job as a co-leader of Cornerstone Charity Fair. Considering that numerous people in Tanzania are struggling with their living because of the war, I felt that I want to provide some power for them to overcome it. For that, I will try to make the Cornerstone Charity Fair successful. As I got designated as a co-leader, I sincerely want to have sufficient responsibility. To achieve this goal, I would make an effort to gather the clubs that would participate for the booths in this event. I truly hope to be able to make a perfect event. Also, as a designer of this club, I want to be able to create posters for the fundraising events with high quality. Since I believe that clarity is the key of the poster, I would practice designing posters more often to provide well made posters for this club. Lastly, when there were any fundraising events, I would do my best to participate in the event. Since more profits from the fundraising guarantees us more profit, which leads to the capitals for the charity fair. This semester would be a great opportunity for me to take one more step."}, {"title": null, "author": "Ashley Lee", "body": "This is my 5th semester at SOTZ. And this semester I want to be a supporter and a provider. Through the years, we’ve worked hard and we had new members that contributed to our club. I have maintained my role as a treasurer for a while now, and I realized that my role is more than just managing money. My job of managing and providing data of our spending was a connector of our projects. So in this semester, I want to continue that role of a connector and as a one member of our club, I want to be a successful connector and a member that my members can rely on. I am planning on being productive and organizing time and money effectively, maximizing our efficiency. I also want to be a good communicator, communicating with my members to stay aligned with our goals and increasing productivity. I think communicating is essential in any group or organization and I believe we’ve been quite successful in communicating with each other last semester. I wish to continue our strength to finish this semester with fulfillment as a united group. For some members, this is their last semester and for some is their second semester. I am proud of my members for being committed to our club and I will try my best to be a great member and a connector for our club."}, {"title": null, "author": "Jiwoo Hong", "body": "As the secretary of SOTZ this semester, I want to contribute by supporting the club in ways that directly help both our members and the children we are working for. I believe the secretary role is not only about organizing documents or recording information, but also about helping the club operate smoothly and making sure our projects continue effectively. One of my goals is to improve communication and organization within the club. I plan to keep meeting records organized, manage schedules carefully, and help members stay updated on ongoing projects and events. Since SOTZ works on activities related to supporting children, I think clear communication is especially important because every project requires teamwork and consistency. I also want to actively support our donation drives, fundraising activities, and textbook projects. These activities can directly impact children by providing educational resources and support. I hope to contribute ideas, help coordinate events, and encourage participation so that our efforts can reach more students. Most importantly, I want to work with a genuine desire to help children. Even small tasks done responsibly can create meaningful change, and I hope to contribute through dedication and service throughout this semester. I also hope to inspire other members to stay involved and remember the purpose behind our work. By working together and supporting one another, I believe our club can create an even greater impact this semester."}]}, {"short": "Passion", "title": "Passionate About This Club", "cap": "why we stay", "img": "assets/images/passinate_about_this_club.jpg", "blurb": "The honest answer to why we care so much about SOTZ.", "arts": [{"title": null, "author": "Jiwoo Hong", "body": "Whenever I am asked why I am so passionate about SOTZ, I am always brought back to just one moment from Tanzania, the first time I laid eyes on these children in Zanzibar. I had seen pictures of volunteer camps, but nothing prepared me for the brightness in their eyes. Their eyes weren't just sparkling; they were filled with a kind of hope that felt almost fragile, as if the world could either protect it or take it away. That changed something inside of me. What I did at this camp was to play with kids and teach them things, or sometimes just sit with them. More than anything else, what struck me was the fact that they really wanted to learn and cherished every bit of time a companion was ready to spend with them. These children shared a pencil, learned a word, listened to a story, and the depth of the experience made each and every moment count, as if it were a meaningful one. And they were meaningful to them, and then eventually to me. The curiosity was purer, the happiness more honest, than anything I had ever experienced. Once I left Tanzania, I realized that I did not want my experience to be merely a memory. I wanted to stay connected with the children who inspired me, and I wanted to continue supporting them in any way possible. That's why I joined SOTZ. For me, this club isn't just about supplying aid to Zanzibar; it's about protecting that light I saw in those children. I want their spark to last, grow, and never dim because of circumstances beyond their control. My passion for SOTZ is rooted in the belief that even the most minute actions help keep that hope alive. Be it fundraising, event organization, or awareness, any form of effort feels significant in light of its direct relation to the kids who shaped my perspective. I'm committed not out of obligation, but out of genuine love for the kids who showed me what resilience and joy look like. More than a school club, SOTZ is the promise I made to myself to give back to the children whose bright eyes changed my worldview. And as long as I’m part of SOTZ, I hope to keep that promise by helping their light shine a little longer and a little brighter."}, {"title": null, "author": "Gain Kang", "body": "Being part of our Tanzania donation club has become one of the most meaningful commitments in my school life. What makes me passionate about this club is not only the idea of helping others, but the fact that our actions directly touch the lives of students who deserve better educational opportunities. Education is something I often take for granted—I have easy access to textbooks, teachers, and safe classrooms—but in many parts of Tanzania, children and communities simply do not have these basic resources. Realizing this made me want to take responsibility and give back in any way I can. One of the most inspiring aspects of the club is the process of creating and sending textbooks. Knowing that a book we design, print, and package might become the only learning material a child receives is incredibly powerful. Every page we work on feels meaningful because it is more than just a school assignment—it’s a tool that can help someone learn to read, solve math problems, or understand the world. I love the idea that even small efforts from us can open new doors for children who have big dreams but limited resources. I am also passionate about how our club builds a sense of global connection. Supporting Tanzanian students reminds me that the world is much bigger than my own experiences in Korea and the U.S. We may live thousands of kilometers apart, but we share the belief that education can change lives. Our donations—whether they are textbooks, funds, or supplies—show these students that people across the world care about their future. That feeling of connection motivates me to stay involved and to do more each year. Ultimately, this club teaches me responsibility, empathy, and the value of service. It reminds me that even as a student, I have the power to make a real difference. That is why I am passionate about this club: because every project we complete becomes an opportunity to bring hope, encourage learning, and support students who deserve the chance to follow their dreams."}, {"title": null, "author": "Hyeon Ju", "body": "I have never thought of being a member of this club. I just went to Tanzania without any idea. However, when my intuition led to this club, I was able to realize that my goal is to help people who might be suffering from poverty, lacking capitals, and etc. In 2024, I first joined this club to find my passion in Tanzania. I felt nothing as I was just doing fundraising in this club. However, I was able to learn how my little action can influence the whole community in Zanzibar. This made me have a determination to go to Tanzania every year and be engaged in every SOTZ meeting. It is not an easy thing to visit Tanzania every year as it takes a single day to go to and return from Tanzania. I know it is a toiling part but I must proceed with my action for a better life, better future, and better society. Regardless of my Tanzania experience, I am interested in this club for 3 reasons: First, this club has a meeting where students can share their own ideas to cooperate and develop the club. This allows my ability to communicate to be improved. Second, this club is a special club. Our club leader is efficient in that she only opens the meeting that is necessary. She tries her best to save our free time so that they can do whatever they could do. Lastly, our club has a deep history. This club started when our leader went to Tanzania for the first time. This makes her journey and the club unique."}, {"title": null, "author": "Lime Lee", "body": "I want to be honest about it. At first, I was not very interested. For me, it was just one of many clubs at our school, and I joined simply because my friends recommended it. They said the people were nice and the work was good. I knew almost nothing about the club except that SOTZ helps children in Zanzibar. I did not understand how we helped them or why it mattered so much to the other members. I rarely attended the first few meetings with full attention. However, my mind changed after our last fundraising event. The event itself required significant effort from everyone. We had to organize volunteers, set up menus, and manage the money safely. Indeed, it took many planning sessions to make this fundraising possible. Through this experience, I witnessed something that changed my perspective: the genuine passion of our leaders and club members. They did not complain about the long hours. Instead, they worked hard and stayed focused on our goal. Their dedication made me stop and reflect deeply. I started asking myself a question: \"What have I actually done for this club?\" The honest answer was nothing. I realized I had been passive while others worked hard for something meaningful. This experience shifted how I think about my role in the club. I became genuinely curious about what I could actually do to help the children in Zanzibar. Through my continued involvement with SOTZ, I want to explore different ways to contribute and discover what kind of meaningful impact I can make as a member."}, {"title": null, "author": "Seungli Namgung", "body": "Through SOTZ, I want to comprehend a deeper understanding about the African population. When I went on a vision trip to Tanzania for volunteering, I felt numerous things. Incredibly different environment of Tanzania made me interested in international culture. Through it, I realized that in this world, there are numerous things I do not know about the world yet. Also, I found that by experiencing and helping Tanzanian kids through volunteer work, I can deeply understand Tanzanians’ lives in general. I joined SOTZ, because I volunteered in Tanzania. In January of 2025, I served Tanzanian locals. I drew murals at school, even taught Tanzanian kids. By seeing the Tanzanian population, I found out that I am able to help them in many parts of their lives. From these experiences, I felt that I want to continue to support Tanzanians by using my strength. Therefore, I saw the opportunity to aid Tanzanians in SOTZ. I am sure that I would be able to make a positive change on Tanzania in this club. Even more, I would like to learn how to contribute to society through the projects I will make. I am very excited with future fundraisings, and community service projects that would be added to my experience. I truly desire to make a difference to society by the projects that I would make in SOTZ."}, {"title": null, "author": "Ashley Lee", "body": "In this club, I am passionate about bringing change through relation and association. During my time in SOTZ, we have achieved many of our goals of successfully finishing projects and sending them to our mission school. And through these experiences, thrive on the passion that keeps me going. Also that is what I have pride in my club. Our projects were not easy, and there were many difficulties along the way that made us consider other options; but through our persistent effort and communication within members, we were able to achieve our club’s goal of bringing joy to the children of our mission school. When I saw the pictures of the children receiving the gifts and letters we prepared for them, I was very proud and it reminded me of what I am passionate about in my club. Not just from collective work, I also feel passionate and responsible for my individual work in this club. As the treasurer, I have certain responsibilities that come with the role. I have been evaluative in our budgeting process, and record precise numbers that help aid the process of progress. And while taking this role, I felt the most passionate when at the end of each semester, when all the money is sent to the school with number 0 on our account. This gave the sense of completion and happiness that our hard work is going to be used to help those who need it. Of course, this wouldn’t be possible with the help of our members that always encourage me and each other to keep going. And this is what I am most passionate about our club and take gratitude from."}, {"title": null, "author": "Audrey Seo", "body": "I was passionate about this SOTZ club because it gave me the chance to help children who need support and hope for their future. I have always enjoyed serving others, and I want to use my time to make a positive impact . As a Christian, I believe that love should be shared, and I want to reflect the kindness and care I have received in my life. fundraising and supporting this club, I hope the children will feel valued, loved, and encouraged. Being part of this club feels meaningful to me because we are not only giving resources,we are giving hope and love by our actions.\n\nI was passionate about this SOTZ club because it gave me the chance to help children who need support and hope for their future. I have always enjoyed serving others, and I want to use my time to make a positive impact . As a Christian, I believe that love should be shared, and I want to reflect the kindness and care I have received in my life. By fundraising and supporting this club, I hope the children will feel valued, loved, and encouraged. Being part of this club feels meaningful to me because we are not only giving resources,we are giving hope and love by our actions."}]}, {"short": "School", "title": "Journal: Teaching at Hope School", "cap": "in the classroom", "img": "assets/images/teaching_hope_school.png", "blurb": "Standing in front of a class for the very first time, and what teaching asked of us.", "arts": [{"title": "My Experience of Teaching in Hope School", "author": "Marvin Lim", "body": "Junho, Mr. Chun, and I, as a science department, prepared several experiments for students at Hope School. The first experiment that we prepared was ice cream making. Since it was the first day of teaching them, we placed this experiment on the first day to give them a huge impression, and we wanted them to have fun in the class while learning. At first, we struggled with communication, so our plan did not go well in the beginning. However, as we experienced more kids, we learned how to easily communicate with and teach them. We divided our work evenly, and I could already see how we improved only after teaching a few classes. Until the end of the period, we worked hard and finished all the classes successfully. With some leftovers, we also provided some ice cream to the teachers and other teammates who were also working extremely hard teaching students."}, {"title": "First Time Being a Teacher", "author": "Yoonjae Park", "body": "Zanzibar was a special place to attend an education volunteering activity. The buildings looked unfamiliar, the weather was quite opposite from South Korea, and the students were younger than us by at least 6 years. I first thought that all those points would act like a barrier between students and us, preventing all of us from getting close at all. However, as I rapidly got used to the facility and people, and especially learned one lesson, I realized that my concern was soundly mistaken. Effectively, both sides—a group from Korea and the villagers—have gradually opened their hearts. I was in charge of providing students with physical education, for example, soccer or jump rope. On the first day of education, students were quite frozen; even some students did not show any interest or passion in our education, for instance, not participating in handling the soccer ball. However, we put our great effort into getting closer. Our reaction to children’s nice jobs, such as engaging in high fives or speaking a few positive Swahili words, showed love towards them, and that has made a huge difference. What hit my mind the most frequently during education, which I referred to in a lesson above, was that although the students have different appearances, ages, and backgrounds from the group from Korea, they have the same hearts. We, this time including the students, all love to run around without reason, to kick a ball with friends, and to be loved by others. My beloved little friends made me decide to convey love and hope afterwards."}, {"title": "Meeting Students", "author": "John Park", "body": "From January 3rd to January 17th, we had a vision trip to Tanzania and did education volunteering. I taught them art with Lea, Chloe, and Tyler. On the first day of education volunteering, not all students followed the lecture well. I guess they were a little shy. I lost a lot of my confidence and felt like I wanted to go home that day. But on the second day, they began to open their hearts to us and showed that they were happy to be with us. I was very touched by their smile on that day. I decided to be a person who could make others smile from that day on. Even though our language was different and it made it hard to communicate, it did not matter. I learned a big lesson that day. If I want to make others smile, then I need to smile first for them. I learned that no matter the language, a smile can make others happy. I always worried that if I could not make others happy,. But the children in Tanzania told me, “Don’t worry, your smile can make others happy.”"}, {"title": "Being a Teacher in Tanzania", "author": "Marvin Lim", "body": "Have you ever thought about being a teacher in a foreign country? I never thought that I would be teaching children in a foreign country as a student. But as I progressed in teaching for those 4 days, I realized how the kids in Tanzania were the most grateful and purist children ever. As we first met, they didn’t hesitate to greet us and play with us. They would laugh about little things. We proceeded with our class by teaching them alphabets with songs and writing. We sang alphabet songs together in class and played fun games together. During the process, there were many types of children, just like in every other school. Some kids were really competitive and tried to finish their work really fast, and some kids liked interacting with us and playing more than learning. Of course, teaching little children wasn’t easy. But every time I complimented them, they would always smile and start to open their hearts to us. Every moment I spent with those kids was truly fun and amazing. This experience made me learn and mature during the process. I think this will be a strong memory in my head."}]}, {"short": "Travels", "title": "Journal: Town, Travel & Art", "cap": "everything outside class", "img": "assets/images/tanzania_arts.png", "blurb": "The local town, long roads and wide views, colour and art, and what it left behind.", "arts": [{"title": "Local Town", "author": "Ashley Lee", "body": "During my visit to Tanzania, I was able to visit some local towns there. When I first went there, I was surprised by the different scenery from Korea and how each town has huge gaps. In Korea, there are many apartments, and most of the houses are tall. But the town we visited usually had only one floor and looked like it was built of stones. And the houses were close to each other and had complex paths within the town. Thankfully, the local residents there welcomed us, and we were able to look around the town. The town we visited was very near the school we went to, so it was apart from the place with many people. But while we were moving from place to place, I was able to see local towns with similar characteristics to Korea. Even though both towns were amazing to look at, it surprised me how much of a gap each town could have. I wasn’t able to look through many local towns, so I cannot say what I saw is all of Tanzania, but the experience of having to peek at other countries’s lifestyles was truly amazing, and I was so grateful that I was able to have this experience."}, {"title": "New Place", "author": "Sohyeon Lee", "body": "The local town I visited in Tanzania was a brand-new experience for me. The life that was shown inside the town led me to have a deeper look into Tanzanian culture. The local town I have seen shows that every single person is trying their best to live. Their town, from our perspective, might be a lot underdeveloped and feel poor. However, their smile and their bright movements were big motivations for me. Their houses were not big or fancy. To be honest, the houses looked weak; I could not imagine myself living there. By looking at their houses, I felt more guilt. Even they could laugh and simile at their lives, but why couldn’t I? I have gotten more support from everywhere. I recapped my life, and I promised myself that, at least from now on, I will be thankful and appreciative of everything I get, every chance I get, and every experience I get."}, {"title": "Tour in Tanzania", "author": "Ashley Lee", "body": "Tanzania is one of the most famous travel destinations for many people due to its beautiful oceans and grand serengeti full of majestic animals. I had many interesting experiences in Tanzania, but the natural safari was one of the most intriguing experiences I ever had. We went on a jeep and toured around the Ngorongo crater. Even though the ride was very long, we didn’t have time to rest because of the fantastic views we could see outside. Inside the crater, we were able to see many animals, such as zebras, buffalo, lions, yaks, etc. It was a very memorable moment because it was my first time looking at those animals up close, and it might be the last time I ever see them that close. Looking at those animals made me feel fresh and made me realize how beautiful nature is. We usually see animals inside a cage tamed by human hands, but the animals in there were free and looked more natural. It was unbelievable that I was there, and every moment went by so quickly. Even though times have passed since then, the memory from there still makes me go back."}, {"title": "Enchanting Experience", "author": "Yoonjae Park", "body": "During my visit to Tanzania, I was able to visit some local towns there. When I first went there, I was surprised by the different scenery from Korea and how each town has huge gaps. In Korea, there are many apartments, and most of the houses are tall. But the town we visited usually had only one floor and looked like it was built of stones. And the houses were close to each other and had complex paths within the town. Thankfully, the local residents there welcomed us, and we were able to look around the town. The town we visited was very near the school we went to, so it was apart from the place with many people. But while we were moving from place to place, I was able to see local towns with similar characteristics to Korea. Even though both towns were amazing to look at, it surprised me how much of a gap each town could have. I wasn’t able to look through many local towns, so I cannot say what I saw is all of Tanzania, but the experience of having to peek at other countries’s lifestyles was truly amazing, and I was so grateful that I was able to have this experience."}, {"title": "Tanzania Arts", "author": "Ashley Lee", "body": "Tanzania has one of the most majestic arts I have ever seen. When you think of art, African culture is not the first thing you think of. But after seeing art works, it made me stare at all those works for hours. There were a variety of art works I’ve seen. But one of the artworks that I remember most clearly are the sculptures. There was a tower-like structure that towered up toward the ceiling. It consisted of many people piled up together, which formed the structure. When I first saw it, I was surprised at the size of the sculpture. It was huge, and it gave me a grand feeling. Another artwork was the painting. The paintings were very realistic, and it felt like they were alive. The paintings portray the scenery and the animals so well that they look like real animals. Overall, I was very impressed by all the artwork, which made me one step closer to approaching Tanzanian culture."}, {"title": "Great Experience", "author": "John Park", "body": "During 2 weeks in Tanzania, I could experience lots of cultural differences, and culture in Tanzania gave me a turning point in my life. Before we became educational volunteers, we could see that there were no lanes on the roads, and it caused a lot of traffic jams. That made me think that what I just have in South Korea can be a thankful thing for me. I think that the biggest culture in Tanzania was “being thankful.” People in there didn’t have a lot of things that we have, but they had very thankful lives. It made me think that I should be thankful for everything that I have in my life. During education volunteer, I was able to see kids smiling and being happy even though their houses were smaller than us, they didn’t have shoes, they didn’t have phones, or they didn’t have toilet papers. I have learned that happiness doesn’t come from what we have, but it comes from being thankful by experiencing culture in Tanzania. Missionaries gave me lessons too. Even though they couldn’t have that they could in South Korea, they were thankful to help people there. I have learned that even though my life might seem more uncomfortable than I expected, I can still be thankful and happy. I have confidence in myself that if I can be thankful for what I have, I can have a happy life too. Thanks to Tanzanian culture, my mindset has changed, and it has made me happier than before, since I am more thankful than before."}, {"title": "What I Felt", "author": "Ashley Lee", "body": "When you visit other countries, you can experience a lot of cultural differences. Cultures are one of the characteristics of that country that makes them special. When I visited Tanzania, Zanzibar, I saw many people with great enthusiasm with music and such. The music they sang was very different from K-pop or pop music, but watching people sing and dance to their music made me excited and hyped up. I came across many different songs there, and thankfully I got the experience to sing with the locals. While I was singing, I realized no matter what country you are from or how different you look, cultures can lead each other to experience and learn each other’s customs in a fun way. Just like the song we learned there, which helped us understand each other. Another example would be how they greet foreigners there. In Korea, there are a lot of foreigners but still we tend to stare at them. But as I was there, people said ‘hellos’ to us and greeted us quite nicely. Even though not all of them were in good intentions, still, getting good welcomings made me a little less tense of visiting a new country. We had many difficulties due to cultural differences in Tanzania, but looking back at those moments, even the toughest moments made us a little closer to them and understand them as we are all just humans with different traits."}]}];
+(function () {
+  'use strict';
+
+  var pgL = document.getElementById('pgL'), pgR = document.getElementById('pgR');
+  var turn = document.getElementById('turn');
+  var faceF = document.getElementById('faceF'), faceB = document.getElementById('faceB');
+  var btnPrev = document.getElementById('prev'), btnNext = document.getElementById('next');
+  var ribbons = document.getElementById('ribbons');
+  var book = document.getElementById('book');
+  var measure = document.getElementById('measure');
+
+  var PAGES = [], spread = 0, busy = false, maxSpread = 0, sectionPage = [];
+  var CORNER = '<button class="corner" aria-label="Turn the page"></button>';
+
+  function esc(s) {
+    return String(s).replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;');
+  }
+  function paras(text) {
+    return String(text).split(/\n{2,}/).filter(Boolean);
+  }
+  function firstSentenceTitle(text) {
+    var clean = String(text || '').replace(/\s+/g, ' ').trim();
+    var sentence = (clean.match(/^.*?[.!?](?=\s|$)/) || [clean])[0];
+    var max = 24;
+
+    if (sentence.length <= max) return sentence;
+
+    var shortened = sentence.slice(0, max + 1);
+    var lastSpace = shortened.lastIndexOf(' ');
+    if (lastSpace > 12) shortened = shortened.slice(0, lastSpace);
+    else shortened = shortened.slice(0, max);
+    return shortened.replace(/[,:;.!?\s]+$/, '') + '…';
+  }
+
+  /* ---------- pagination ---------- */
+  function pageBox() {
+    // measure has the same padding as a page, and scrollHeight counts padding,
+    // so compare against the page's full inner height (minus a small safety gap)
+    return pgL.clientHeight - 4;
+  }
+
+  function fits(html, limit) {
+    measure.innerHTML = html;
+    return measure.firstChild ? measure.scrollHeight <= limit : true;
+  }
+
+  /* split one article into as many pages as its text needs */
+  function paginateArticle(a, sectionTitle) {
+    var limit = pageBox();
+    measure.style.width = pgL.clientWidth + 'px';
+    measure.style.height = pgL.clientHeight + 'px';
+
+    var displayTitle = a.title || firstSentenceTitle(a.body);
+    var header = '<div class="a-title">' + esc(displayTitle) + '</div>' +
+                 '<div class="a-by">by ' + esc(a.author) + '</div>';
+    var blocks = paras(a.body);
+    var out = [], first = true;
+    var i = 0;
+
+    while (i < blocks.length) {
+      var head = first ? header : '';
+      var cls = 'a-body' + (first ? ' first' : '');
+      var taken = [];
+      var progressed = false;
+
+      while (i < blocks.length) {
+        var trial = taken.concat([blocks[i]]);
+        var html = head + '<div class="' + cls + '">' +
+                   trial.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div>';
+        if (fits(html, limit)) { taken = trial; i++; progressed = true; continue; }
+
+        // the paragraph does not fit whole: break it by words
+        var words = blocks[i].split(' ');
+        var lo = 1, hi = words.length, best = 0;
+        while (lo <= hi) {
+          var mid = (lo + hi) >> 1;
+          var partial = taken.concat([words.slice(0, mid).join(' ')]);
+          var h2 = head + '<div class="' + cls + '">' +
+                   partial.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div>';
+          if (fits(h2, limit)) { best = mid; lo = mid + 1; } else { hi = mid - 1; }
+        }
+        if (best > 0) {
+          taken = taken.concat([words.slice(0, best).join(' ')]);
+          blocks[i] = words.slice(best).join(' ');
+          progressed = true;
+        }
+        break;
+      }
+
+      if (!progressed) { taken = [blocks[i]]; i++; }   // safety valve
+
+      out.push({
+        kind: 'art', section: sectionTitle,
+        html: head + '<div class="' + cls + '">' +
+              taken.map(function (p) { return '<p>' + esc(p) + '</p>'; }).join('') + '</div>' +
+              (i < blocks.length ? '<div class="cont">continued &rarr;</div>' : '')
+      });
+      first = false;
+    }
+    return out;
+  }
+
+  function buildPages() {
+    PAGES = [];
+    sectionPage = [];
+
+    PAGES.push({ kind: 'toc' });
+
+    SECTIONS.forEach(function (s, si) {
+      sectionPage[si] = PAGES.length;
+      PAGES.push({ kind: 'div', si: si });
+      s.arts.forEach(function (a) {
+        paginateArticle(a, s.title).forEach(function (p) { PAGES.push(p); });
+      });
+    });
+
+    PAGES.push({ kind: 'end' });
+    if (PAGES.length % 2) PAGES.push({ kind: 'blank' });
+    maxSpread = PAGES.length / 2 - 1;
+  }
+
+  /* ---------- rendering ---------- */
+  function render(p, idx) {
+    if (!p) return '';
+    var num = '<div class="pgno">' + (idx + 1) + '</div>';
+
+    if (p.kind === 'toc') {
+      var rows = SECTIONS.map(function (s, i) {
+        return '<li><button data-go="' + i + '">' +
+                 '<span class="num">' + ('0' + (i + 1)).slice(-2) + '</span>' +
+                 '<span class="ttl">' + s.title + '</span>' +
+                 '<span class="dots"></span>' +
+                 '<span class="p">p. ' + (sectionPage[i] + 1) + '</span>' +
+               '</button>' +
+               '<div class="sub">' + s.arts.length + ' writings</div></li>';
+      }).join('');
+      return '<div class="head">Contents</div>' +
+             '<div class="dateline">every piece our members have written &mdash; tap a line, or just turn the pages</div>' +
+             '<div class="sec-label">Six sections &middot; ' +
+               SECTIONS.reduce(function (n, s) { return n + s.arts.length; }, 0) + ' writings</div>' +
+             '<ul class="toc">' + rows + '</ul>' + num;
+    }
+
+    if (p.kind === 'div') {
+      var s2 = SECTIONS[p.si];
+      return '<div class="divider">' +
+               '<div class="num2">Section ' + ('0' + (p.si + 1)).slice(-2) + '</div>' +
+               '<h2>' + s2.title + '</h2>' +
+               '<div class="rule"></div>' +
+               '<div class="snap"><img src="' + s2.img + '" alt="" onerror="this.onerror=null;this.src=\'assets/images/enhancing_experience.png\';"><div class="cap">' + s2.cap + '</div></div>' +
+               '<div class="blurb">' + s2.blurb + '</div>' +
+               '<div class="count">' + s2.arts.length + ' writings &rarr;</div>' +
+             '</div>' + num;
+    }
+
+    if (p.kind === 'art') {
+      return '<div class="runhead">' + p.section + '</div>' + p.html + num;
+    }
+
+    if (p.kind === 'end') {
+      return '<div class="endpg">' +
+               '<div class="fin">Fin &#10022;</div>' +
+               '<div class="note">That is everything in the book so far. New pages get added every semester &mdash; come back and turn them.</div>' +
+               '<button class="again" data-go="-1">back to the contents &#8635;</button>' +
+             '</div>' + num;
+    }
+    return num;
+  }
+
+  function paint() {
+    pgL.innerHTML = render(PAGES[spread * 2], spread * 2);
+    pgR.innerHTML = render(PAGES[spread * 2 + 1], spread * 2 + 1) + (spread < maxSpread ? CORNER : '');
+    btnPrev.disabled = spread === 0;
+    btnNext.disabled = spread === maxSpread;
+
+    var cur = -1;
+    SECTIONS.forEach(function (s, i) {
+      if (spread * 2 + 1 >= sectionPage[i]) cur = i;
+    });
+    [].forEach.call(ribbons.children, function (r, i) { r.classList.toggle('on', i === cur); });
+  }
+
+  /* ---------- flipping ---------- */
+  function go(dir, done) {
+    if (busy) return;
+    var to = spread + dir;
+    if (to < 0 || to > maxSpread) return;
+    busy = true;
+
+    if (dir > 0) {
+      faceF.innerHTML = render(PAGES[spread * 2 + 1], spread * 2 + 1);
+      faceB.innerHTML = render(PAGES[spread * 2 + 2], spread * 2 + 2);
+      pgR.innerHTML = render(PAGES[spread * 2 + 3], spread * 2 + 3) + (to < maxSpread ? CORNER : '');
+      turn.className = 'turn on fwd';
+    } else {
+      faceB.innerHTML = render(PAGES[spread * 2], spread * 2);
+      faceF.innerHTML = render(PAGES[spread * 2 - 1], spread * 2 - 1);
+      pgL.innerHTML = render(PAGES[spread * 2 - 2], spread * 2 - 2);
+      turn.className = 'turn on bwd';
+    }
+
+    turn.addEventListener('animationend', function h(e) {
+      if (e.target !== turn) return;
+      turn.removeEventListener('animationend', h);
+      spread = to;
+      paint();
+      turn.className = 'turn';
+      busy = false;
+      if (done) done();
+    });
+  }
+
+  /* jump straight to a spread with a single page turn */
+  function jumpToPage(pageIdx) {
+    var to = Math.floor(pageIdx / 2);
+    if (to < 0) to = 0;
+    if (to > maxSpread) to = maxSpread;
+    if (busy || to === spread) return;
+    busy = true;
+
+    if (to > spread) {
+      faceF.innerHTML = render(PAGES[spread * 2 + 1], spread * 2 + 1);
+      faceB.innerHTML = render(PAGES[to * 2], to * 2);
+      pgR.innerHTML = render(PAGES[to * 2 + 1], to * 2 + 1) + (to < maxSpread ? CORNER : '');
+      turn.className = 'turn on fwd';
+    } else {
+      faceB.innerHTML = render(PAGES[spread * 2], spread * 2);
+      faceF.innerHTML = render(PAGES[to * 2 + 1], to * 2 + 1);
+      pgL.innerHTML = render(PAGES[to * 2], to * 2);
+      turn.className = 'turn on bwd';
+    }
+
+    turn.addEventListener('animationend', function h(e) {
+      if (e.target !== turn) return;
+      turn.removeEventListener('animationend', h);
+      spread = to;
+      paint();
+      turn.className = 'turn';
+      busy = false;
+    });
+  }
+
+  /* ---------- wiring ---------- */
+  SECTIONS.forEach(function (s, i) {
+    var b = document.createElement('button');
+    b.type = 'button';
+    b.className = 'ribbon r' + (i + 1);
+    b.textContent = s.short;
+    b.addEventListener('click', function () { jumpToPage(sectionPage[i]); });
+    ribbons.appendChild(b);
+  });
+
+  btnNext.addEventListener('click', function () { go(1); });
+  btnPrev.addEventListener('click', function () { go(-1); });
+
+  book.addEventListener('click', function (e) {
+    if (e.target.closest('.corner')) { go(1); return; }
+    var j = e.target.closest('[data-go]');
+    if (!j) return;
+    var v = +j.dataset.go;
+    jumpToPage(v < 0 ? 0 : sectionPage[v]);
+  });
+
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'ArrowRight') go(1);
+    else if (e.key === 'ArrowLeft') go(-1);
+  });
+
+  var x0 = null;
+  book.addEventListener('touchstart', function (e) { x0 = e.touches[0].clientX; }, { passive: true });
+  book.addEventListener('touchend', function (e) {
+    if (x0 === null) return;
+    var dx = e.changedTouches[0].clientX - x0;
+    if (Math.abs(dx) > 55) go(dx < 0 ? 1 : -1);
+    x0 = null;
+  }, { passive: true });
+
+  /* ---------- sizing + build ---------- */
+  function sizePages() {
+    var bookWidth = book.clientWidth || (book.parentElement ? book.parentElement.clientWidth : 0) || Math.min(window.innerWidth * 0.96, 1120);
+    var w = bookWidth / (window.matchMedia('(max-width: 760px)').matches ? 1 : 2);
+    var h = Math.max(430, Math.min(Math.round(w * 1.3), Math.round(window.innerHeight * 0.92)));
+    pgL.style.height = pgR.style.height = h + 'px';
+    measure.style.height = h + 'px';
+    measure.style.width = w + 'px';
+  }
+
+  function rebuild(keepPage) {
+    sizePages();
+    buildPages();
+    spread = Math.min(Math.floor((keepPage || 0) / 2), maxSpread);
+    paint();
+  }
+
+  function start() { rebuild(0); }
+
+  if (document.fonts && document.fonts.ready) document.fonts.ready.then(start);
+  else window.addEventListener('load', start);
+
+  var t = null;
+  window.addEventListener('resize', function () {
+    clearTimeout(t);
+    t = setTimeout(function () { rebuild(spread * 2); }, 220);
+  });
+})();
+    </script>
 </body>
 
 </html>
