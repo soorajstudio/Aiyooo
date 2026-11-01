@@ -1516,8 +1516,10 @@
 }.ayioo-part .header {
   z-index: 999;
   width: 100%;
-  position: fixed;
-  inset: 0% 0% auto;
+  position: relative;
+  inset: auto;
+  background-color: #fae3e2;
+  border-bottom: 1px solid rgba(255, 84, 0, 0.12);
 }.ayioo-part {
   background-color: var(--brand-secondary);
   overflow: hidden;
