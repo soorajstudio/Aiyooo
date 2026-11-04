@@ -20,7 +20,7 @@ export const App: React.FC = () => {
 
   return (
     <SmoothScroll>
-      <div id="home">
+      <div id="home" className="page-wrapper">
         <AiyoooNavbar />
 
         <div className="main-wrapper">

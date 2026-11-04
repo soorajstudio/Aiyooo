@@ -11,37 +11,53 @@ export const AiyoooHero: React.FC = () => {
     const container = containerRef.current;
     if (!container) return;
 
-    const items = Array.from(container.querySelectorAll('.title_item')) as HTMLElement[];
+    const items = Array.from(container.querySelectorAll<HTMLElement>('.title_item'));
     if (!items.length) return;
 
     let activeIndex = 0;
-    const itemHeight = items[0].offsetHeight || 60;
+    const itemHeight = items[0].offsetHeight || 56;
     const totalItems = items.length;
     const intervalTime = 1500;
 
     const setActive = (index: number) => {
       items.forEach((item, i) => {
-        if (i === index) {
-          item.classList.add('is-active');
-        } else {
-          item.classList.remove('is-active');
-        }
+        item.style.opacity = i === index ? '1' : '0.4';
       });
+    };
+
+    const animateToIndex = (index: number, duration = 0.5) => {
+      gsap.to(container, {
+        y: -index * itemHeight,
+        duration: duration,
+        ease: 'power2.inOut',
+      });
+    };
+
+    const steppedOpacityCycleBack = () => {
+      const duration = 0.6;
+      gsap.to(container, {
+        y: 0,
+        duration: duration,
+        ease: 'back.out(1.2)',
+        onComplete: () => setActive(0),
+      });
+    };
+
+    const nextStep = () => {
+      activeIndex++;
+      if (activeIndex >= totalItems) {
+        activeIndex = 0;
+        steppedOpacityCycleBack();
+      } else {
+        animateToIndex(activeIndex);
+        setActive(activeIndex);
+      }
     };
 
     setActive(0);
     gsap.set(container, { y: 0 });
 
-    const interval = setInterval(() => {
-      activeIndex = (activeIndex + 1) % totalItems;
-      setActive(activeIndex);
-
-      gsap.to(container, {
-        y: -activeIndex * itemHeight,
-        duration: 0.6,
-        ease: 'power2.inOut',
-      });
-    }, intervalTime);
+    const interval = setInterval(nextStep, intervalTime);
 
     return () => {
       clearInterval(interval);

@@ -80,25 +80,53 @@ export const AiyoooExpertises: React.FC = () => {
     if (!wrapperRef.current) return;
 
     const ctx = gsap.context(() => {
-      const slides = gsap.utils.toArray<HTMLElement>('.expertises-item');
-      if (slides.length > 1) {
-        const tl = gsap.timeline({
-          scrollTrigger: {
-            trigger: wrapperRef.current,
-            pin: true,
-            scrub: 1,
-            start: 'top top',
-            end: () => `+=${window.innerHeight * (slides.length - 1)}`,
-            invalidateOnRefresh: true,
-          },
-        });
+      gsap.to('.scroll', {
+        autoAlpha: 0,
+        duration: 0.2,
+        scrollTrigger: {
+          trigger: '.mwg_effect031',
+          start: 'top top',
+          end: 'top top-=1',
+          toggleActions: 'play none reverse none',
+        },
+      });
 
-        slides.forEach((slide, i) => {
-          if (i > 0) {
-            tl.from(slide, { yPercent: 100, ease: 'none' }, i - 1);
-          }
-        });
-      }
+      const slides = document.querySelectorAll<HTMLElement>('.mwg_effect031 .expertise-slide');
+
+      slides.forEach((slide, index) => {
+        const isLast = index === slides.length - 1;
+        const contentWrapper = slide.querySelector<HTMLElement>('.expertise-wrap');
+        const content = slide.querySelector<HTMLElement>('.expertise-content');
+
+        if (!isLast && contentWrapper && content) {
+          gsap.to(content, {
+            rotationZ: (Math.random() - 0.5) * 10,
+            scale: 0.7,
+            rotationX: 40,
+            ease: 'power1.in',
+            scrollTrigger: {
+              pin: contentWrapper,
+              trigger: slide,
+              start: 'top top',
+              end: '+=' + window.innerHeight,
+              scrub: true,
+            },
+          });
+
+          const pinDuration = window.innerHeight;
+
+          gsap.to(content, {
+            autoAlpha: 0,
+            ease: 'power1.inOut',
+            scrollTrigger: {
+              trigger: slide,
+              start: `top+=${pinDuration * 0.75} top`,
+              end: `top+=${pinDuration} top`,
+              scrub: true,
+            },
+          });
+        }
+      });
     }, wrapperRef);
 
     return () => ctx.revert();
