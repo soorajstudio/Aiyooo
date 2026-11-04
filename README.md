@@ -1,109 +1,122 @@
-﻿# 🚀 AIYOOO Startup — Digital Studio & Creative Agency
+# 🚀 Aiyooo — Creative Digital Studio
 
-A modern, high-impact landing page crafted for **AIYOOO Startup**, showcasing digital agency services including custom websites, developer/artist portfolios, ATS-ready resumes, next-generation AI media, and end-to-end startup MVP projects.
+Aiyooo is a creative digital studio landing page designed to showcase modern digital experiences, innovative web solutions, and creative services through an immersive and interactive interface.
 
-The website features smooth 3D card-stacking scroll animations, interactive elastic hover buttons, looping video showcase backgrounds, and a vertical headline ticker.
+Built with modern frontend technologies, smooth scrolling, and engaging animations to deliver a visually memorable experience.
 
----
-
-## ✨ Features & Highlights
-
-- **3D Card Stacking on Scroll**: Powered by **GSAP** & **ScrollTrigger**, service cards smoothly pin, rotate in 3D perspective (`rotationX`, `rotationZ`, `scale`), and fade as the user scrolls through the showcase.
-- **Dynamic Vertical Ticker**: An automated headline ticker in the hero section that cycles through service offerings with fluid easing.
-- **Interactive "Color Swoosh" Buttons**: Custom CSS physics with elastic easing (`--elastic-ease-out`), 3D rotational tilt, and layered background color transitions on hover.
-- **Embedded HTML5 Video Showcase**: High-definition looping video backgrounds embedded directly in service cards for an engaging visual experience.
-- **Fluid Adaptive Scaling**: Responsive sizing system powered by CSS `clamp()` and container query math for seamless presentation across desktop, tablet, and mobile displays.
-- **Floating Navigation Pill**: Smooth-scroll anchored navigation menu with responsive mobile drawer support.
+<p align="center">
+  <a href="https://soorajstudio.github.io/Aiyooo/">
+    <strong>🌐 View Live Website</strong>
+  </a>
+</p>
 
 ---
 
-## 🛠️ Core Services Showcase
+## ✨ Overview
 
-| Section | Service | Description | Media Preview |
-|---|---|---|---|
-| `#portfolio` | **Digital Identity** | High-performance custom portfolios showcasing creative and technical work. | `Media/Luca.mp4` |
-| `#resume` | **Career Boost** | ATS-friendly and visually compelling resumes tailored for career growth. | `Media/panda.mp4` |
-| `#ai-works` | **Next Gen Media** | AI-generated visuals, dynamic promotional videos, and creative media. | `Media/frozen.webm` |
-| `#websites` | **Online Presence** | High-speed, responsive, and SEO-optimized custom web applications. | `Media/THIS_IS_4K_KUNG_FU_PANDA.mp4` |
-| `#projects` | **Startup Projects** | Full-cycle MVP development, SaaS architecture, and product launch support. | `Media/Luca.mp4` |
-| `#contact` | **Contact & Inquiries** | Call-to-action section with direct email contact. | — |
+Aiyooo brings creativity and technology together in a modern digital studio experience.
 
----
+The website showcases a collection of digital services and creative solutions, including web development, personal portfolios, professional resumes, AI-powered media, and startup concepts.
 
-## 📁 Project Structure
+## 🎨 Features
 
-```
+- **Modern UI/UX:** Clean, creative, and visually engaging interface.
+- **Interactive Animations:** Smooth transitions and immersive visual effects.
+- **3D Card Stacking:** Animated card layouts with scroll-based interactions.
+- **Smooth Scrolling:** Enhanced navigation and scrolling experience.
+- **Creative Showcase:** Dedicated sections for digital services and solutions.
+- **Responsive Design:** Optimized layouts for desktop, tablet, and mobile devices.
+- **Video Integration:** Rich visual presentation using HTML5 video.
+
+## 🛠️ Tech Stack
+
+| Technology | Purpose |
+|---|---|
+| HTML5 | Website structure |
+| CSS3 | Styling and layouts |
+| JavaScript | Interactive functionality |
+| GSAP 3.13 | Advanced animations |
+| ScrollTrigger | Scroll-based animation effects |
+| HTML5 Video | Visual content integration |
+
+## 📂 Project Structure
+
+```text
 Aiyooo/
-├── index.html       # Single-page application markup, embedded styles, and GSAP scripts
-├── Media/           # Local video and image assets
-│   ├── Luca.mp4
-│   ├── THIS_IS_4K_KUNG_FU_PANDA.mp4
-│   ├── frozen.webm
-│   ├── panda.mp4
-│   └── Photo_1643970312407.jpg
-└── README.md        # Project documentation
+│
+├── index.html
+├── assets/
+│   ├── images/
+│   ├── videos/
+│   └── fonts/
+│
+├── css/
+│   └── style.css
+│
+├── js/
+│   └── script.js
+│
+└── README.md
 ```
 
----
+*Note: Adjust the folder structure above to match your actual repository.*
 
 ## 🚀 Getting Started
 
-### 1. Direct Browser Launch
-Simply double-click [`index.html`](./index.html) or right-click and select **Open with** > **Google Chrome** / **Microsoft Edge** / **Firefox**.
+Follow these steps to run the project locally.
 
-### 2. Local Development Server
-To serve media files and scripts via a local web server:
+### 1. Clone the repository
 
-**Using Python:**
 ```bash
-cd "Aiyooo"
-python -m http.server 8080
+git clone https://github.com/soorajstudio/Aiyooo.git
 ```
-Then visit `http://localhost:8080` in your web browser.
 
-**Using VS Code:**
-- Install the **Live Server** extension.
-- Right-click [`index.html`](./index.html) and choose **Open with Live Server**.
+### 2. Navigate to the project directory
+
+```bash
+cd Aiyooo
+```
+
+### 3. Run the project
+
+Open `index.html` in your browser or use the Live Server extension in Visual Studio Code.
+
+## 🌐 Live Deployment
+
+The project is hosted using GitHub Pages.
+
+**Live Website:**  
+https://soorajstudio.github.io/Aiyooo/
+
+## 📸 Screenshots
+
+Add screenshots of your project here to showcase its design and interactive experience.
+
+```text
+screenshots/
+├── homepage.png
+├── animations.png
+└── mobile-view.png
+```
+
+## 💡 Project Highlights
+
+- Creative digital studio concept.
+- Scroll-driven animations using GSAP ScrollTrigger.
+- Interactive 3D card-stacking effects.
+- Modern visual storytelling.
+- Focus on user experience and responsive design.
+
+## 👨‍💻 Developer
+
+**Sooraj MS**
+
+- GitHub: [@soorajstudio](https://github.com/soorajstudio)
 
 ---
 
-## ⚙️ Customization Guide
+## ⭐ Support
 
-### Changing Hero Ticker Speed & Items
-In [`index.html`](./index.html), locate the ticker script (around line 587):
-```javascript
-const intervalTime = 1500; // Change interval duration in milliseconds
-```
+If you like this project, consider giving the repository a star!
 
-### Modifying Card Scroll Animation (GSAP)
-In [`index.html`](./index.html), find the ScrollTrigger script (around line 638):
-```javascript
-gsap.to(content, {
-    rotationZ: (Math.random() - 0.5) * 10,
-    scale: 0.7,
-    rotationX: 40,
-    ease: 'power1.in',
-    scrollTrigger: {
-        pin: contentWrapper,
-        trigger: slide,
-        start: 'top top',
-        end: '+=' + window.innerHeight,
-        scrub: true
-    }
-});
-```
-You can tweak `scale`, `rotationX`, and `end` values to adjust the 3D perspective effect.
-
-### Updating Contact Email
-In the `#contact` section, locate the CTA button and update the `href`:
-```html
-<a href="mailto:hello@aiyooo.com" class="button-default w-inline-block">
-```
-
----
-
-## 🧰 Tech Stack
-
-- **Markup & Styling**: HTML5, CSS3 (CSS Custom Properties, 3D Transforms, Responsive clamp scaling)
-- **Animation Engine**: [GSAP (GreenSock)](https://greensock.com/) 3.13.0 + **ScrollTrigger**
-- **Media**: HTML5 Video (`<video>` autoplay, muted, looping WebM/MP4)
+Made with ❤️ and creativity.
