@@ -2,11 +2,7 @@ import { NavLinkItem } from '../types';
 
 export const aiyoooNavLinks: NavLinkItem[] = [
   { label: 'Home', href: '#home', isCurrent: true },
-  { label: 'Portfolio', href: '#portfolio' },
-  { label: 'Resume', href: '#resume' },
-  { label: 'AI Videos & Images', href: '#ai-works' },
-  { label: 'Websites', href: '#websites' },
-  { label: 'Projects', href: '#projects' },
+  { label: 'Works', href: '#expertises' },
   { label: 'Contact Us', href: '#contact' },
 ];
 
